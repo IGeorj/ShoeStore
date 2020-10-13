@@ -30,10 +30,15 @@ namespace ShoesStore
         {
             InitializeComponent();
             DataContext = mvd;
-            using (ApplicationContext db = new ApplicationContext())
-            {
-
-            }
+            //using (ApplicationContext db = new ApplicationContext())
+            //{
+            //    db.Users.Add(new User { Login = "log1", Email = "em1", Password = "pass1", Name = "name1", Proffesion="Admin" });
+            //    db.Users.Add(new User { Login = "log2", Email = "em2", Password = "pass2", Name = "name2", Proffesion="Seller" });
+            //    db.Users.Add(new User { Login = "log3", Email = "em3", Password = "pass3", Name = "name3", Proffesion = "Seller" });
+            //    db.Users.Add(new User { Login = "log4", Email = "em4", Password = "pass4", Name = "name4", Proffesion = "Seller" });
+            //    db.Users.Add(new User { Login = "log5", Email = "em5", Password = "pass5", Name = "name5", Proffesion = "Seller" });
+            //    db.SaveChanges();
+            //}
         }
         private void ButtonFechar_Click(object sender, RoutedEventArgs e)
         {
@@ -57,6 +62,9 @@ namespace ShoesStore
                     break;
                 case 1:
                     cmd.Execute("Store");
+                    break;
+                case 5:
+                    cmd.Execute("Users");
                     break;
                 default:
                     break;

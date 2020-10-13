@@ -8,26 +8,5 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Label Content="HOME" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"></Label>
-        <DataGrid ItemsSource="{Binding Users}" Grid.Row="1" Grid.Column="1" SelectionMode="Single" Background="#FFFFFF" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False" x:Name="OrdersGrid">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Email}" Header="Email" />
-                <DataGridTextColumn Binding="{Binding Login}" Header="Login" />
-                <DataGridTextColumn Binding="{Binding Password}" Header="Password" />
-                <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button x:Name="AcceptButton" Height="25" Width="70" FontSize="10">Get Admin</Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-            <DataGrid.CellStyle>
-                <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
-                    <Setter Property="BorderThickness" Value="0" />
-                    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-                </Style>
-            </DataGrid.CellStyle>
-        </DataGrid>
     </Grid>
 </UserControl>

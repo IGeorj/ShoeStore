@@ -31,6 +31,10 @@ namespace ShoesStore.Commands
             {
                 viewModel.SelectedViewModel = new StoreViewModel();
             }
+            if (parameter.ToString() == "Users")
+            {
+                viewModel.SelectedViewModel = new UsersViewModel();
+            }
         }
     }
 }
