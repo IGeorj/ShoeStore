@@ -1,4 +1,4 @@
-# ARM ShoeStore
+# ARM ShoesStore
 ## Used
 * .NETCore 3.1
 * MaterialDesignThemes 3.2.0
