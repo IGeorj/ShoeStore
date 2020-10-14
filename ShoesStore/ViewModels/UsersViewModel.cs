@@ -1,11 +1,27 @@
-﻿using ShoesStore.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using ShoesStore.Commands;
+using ShoesStore.Models;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace ShoesStore.ViewModels
 {
-    internal class UsersViewModel : BaseViewModel
+    public class UsersViewModel : BaseViewModel
     {
+        private User _selectedUser;
+        public User SelectedUser
+        {
+            get { return _selectedUser; }
+            set
+            {
+                _selectedUser = value;
+                OnPropertyChanged();
+            }
+        }
         private ObservableCollection<User> _users;
 
         public ObservableCollection<User> Users
@@ -30,6 +46,7 @@ namespace ShoesStore.ViewModels
                 SearchUser(_searchedText);
             }
         }
+        public ICommand ChangeProfCommand { get; set; }
 
         public void SearchUser(string text)
         {
@@ -37,7 +54,7 @@ namespace ShoesStore.ViewModels
             {
                 if (text == "")
                 {
-                    Users = new ObservableCollection<User>(db.Users);
+                    LoadDataAsync();
                 }
                 else
                 {
@@ -48,12 +65,34 @@ namespace ShoesStore.ViewModels
                 }
             }
         }
-
-        public UsersViewModel()
+        public void ChangeProf()
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                Users = new ObservableCollection<User>(db.Users);
+                User us = db.Users.FirstOrDefault(x => x == SelectedUser);
+                if(us.Proffesion == "Admin")
+                {
+                    us.Proffesion = "Seller";
+                }
+                else
+                {
+                    us.Proffesion = "Admin";
+                }
+                db.SaveChanges();
+            }
+            LoadDataAsync();
+        }
+        public UsersViewModel()
+        {
+            ChangeProfCommand = new ChangeProfCommand(this);
+            LoadDataAsync();
+        }
+        public async void LoadDataAsync()
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                var items = await db.Users.ToListAsync();
+                Users = new ObservableCollection<User>(items);
             }
         }
     }

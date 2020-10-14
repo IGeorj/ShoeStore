@@ -20,11 +20,11 @@ namespace ShoesStore.Views
     /// </summary>
     public partial class UsersView : UserControl
     {
+        UsersViewModel uvm = new UsersViewModel();
         public UsersView()
         {
+            DataContext = uvm;
             InitializeComponent();
-            DataContext = new UsersViewModel();
         }
-
     }
 }

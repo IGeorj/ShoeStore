@@ -19,7 +19,7 @@
             </Button>
         </StackPanel>
 
-        <DataGrid Margin="5 0 0 0" ItemsSource="{Binding Users}" Grid.Row="1" Grid.Column="1" SelectionMode="Single" Background="#FFFFFF" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False" x:Name="OrdersGrid">
+        <DataGrid Margin="5 0 0 0" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}" Grid.Row="1" Grid.Column="1" SelectionMode="Single" Background="#FFFFFF" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False" x:Name="OrdersGrid">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Email}" Header="Email" />
                 <DataGridTextColumn Binding="{Binding Login}" Header="Login" />
@@ -29,7 +29,7 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="AcceptButton" Height="25" Width="70" FontSize="10" Padding="0">Change</Button>
+                            <Button x:Name="ChangeButton" Height="25" Width="70" FontSize="10" Padding="0" Command="{Binding DataContext.ChangeProfCommand, RelativeSource={ RelativeSource AncestorType={x:Type DataGrid} } }">Change Prof</Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
