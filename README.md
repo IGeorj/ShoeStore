@@ -5,5 +5,4 @@
 * MicrosoftEntityFrameworkCore 3.1.8
 * MicrosoftEntityFrameworkCore.SqlServer 3.1.8
 * MVVM Pattern
-* MSQL
 * WPF
