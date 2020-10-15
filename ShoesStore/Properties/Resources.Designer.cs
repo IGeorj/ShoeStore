@@ -59,15 +59,5 @@ namespace ShoesStore.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Byte[].
-        /// </summary>
-        internal static byte[] img_closeMouseOver {
-            get {
-                object obj = ResourceManager.GetObject("img_closeMouseOver", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
     }
 }

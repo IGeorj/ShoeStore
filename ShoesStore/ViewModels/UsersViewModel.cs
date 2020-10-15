@@ -87,11 +87,12 @@ namespace ShoesStore.ViewModels
             ChangeProfCommand = new ChangeProfCommand(this);
             LoadDataAsync();
         }
+
         public async void LoadDataAsync()
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                var items = await db.Users.ToListAsync();
+                var items = await Task.Run(() => db.Users.ToListAsync());
                 Users = new ObservableCollection<User>(items);
             }
         }

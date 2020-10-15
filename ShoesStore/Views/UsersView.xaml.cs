@@ -23,8 +23,8 @@ namespace ShoesStore.Views
         UsersViewModel uvm = new UsersViewModel();
         public UsersView()
         {
-            DataContext = uvm;
             InitializeComponent();
+            DataContext = uvm;
         }
     }
 }

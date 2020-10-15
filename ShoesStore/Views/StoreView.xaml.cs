@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShoesStore.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -18,9 +19,11 @@ namespace ShoesStore.Views
     /// </summary>
     public partial class StoreView : UserControl
     {
+        StoreViewModel svm = new StoreViewModel();
         public StoreView()
         {
             InitializeComponent();
+            DataContext = svm;
         }
     }
 }
