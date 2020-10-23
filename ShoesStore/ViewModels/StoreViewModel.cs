@@ -16,14 +16,6 @@ namespace ShoesStore.ViewModels
 {
     public class StoreViewModel : BaseViewModel
     {
-        public string ImagePath
-        {
-            get
-            {
-                return @"D:\512x512.jpg";
-            }
-        }
-
         private ObservableCollection<Product> _products;
 
         public ObservableCollection<Product> Products

@@ -13,7 +13,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel HorizontalAlignment="Right" Grid.Row="0" Orientation="Horizontal">
-            <TextBox x:Name="SearchBox" Text="{Binding SearchedText, UpdateSourceTrigger=PropertyChanged}" Padding="2" FontSize="17" Margin="5" Width="200"></TextBox>
+            <TextBox x:Name="SearchBox" materialDesign:TextFieldAssist.UnderlineBrush="#FF22C68C" Text="{Binding SearchedText, UpdateSourceTrigger=PropertyChanged}" Padding="2" FontSize="17" Margin="5" Width="200" CaretBrush="#FF22C68C"></TextBox>
             <Button x:Name='SearchButton' Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray">
                 <materialDesign:PackIcon Kind="Search"/>
             </Button>
@@ -29,7 +29,7 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="ChangeButton" Height="25" Width="70" FontSize="10" Padding="0" Command="{Binding DataContext.ChangeProfCommand, RelativeSource={ RelativeSource AncestorType={x:Type DataGrid} } }">Change Prof</Button>
+                            <Button Background="#FF22C68C" Foreground="White" x:Name="ChangeButton" Height="25" Width="70" FontSize="10" Padding="0" Command="{Binding DataContext.ChangeProfCommand, RelativeSource={ RelativeSource AncestorType={x:Type DataGrid} } }" BorderBrush="#FF1FCC88">Change Prof</Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

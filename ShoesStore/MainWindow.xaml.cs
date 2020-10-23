@@ -29,10 +29,11 @@ namespace ShoesStore
         public MainWindow()
         {
             InitializeComponent();
+
             DataContext = mvd;
             using (ApplicationContext db = new ApplicationContext())
             {
-                //Initialization
+                //DB Initialization
                 //db.Users.Add(new User { Login = "log1", Email = "em1", Password = "pass1", Name = "name1", Proffesion = "Admin" });
                 //db.Users.Add(new User { Login = "log2", Email = "em2", Password = "pass2", Name = "name2", Proffesion = "Seller" });
                 //db.Users.Add(new User { Login = "log3", Email = "em3", Password = "pass3", Name = "name3", Proffesion = "Seller" });
@@ -44,15 +45,14 @@ namespace ShoesStore
                 //db.Products.Add(new Product { Image = $"{System.Environment.CurrentDirectory}" + @"\Images\Tufli.png", Category = "Tufli", Model = "Addidas", Price = 1, Quantity = 10, Type = "Female" });
                 //db.SaveChanges();
             }
-        }
-        private void ButtonFechar_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Shutdown();
+            SignInView login = new SignInView();
+            login.ShowDialog();
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            DragMove();
+            if (e.LeftButton == MouseButtonState.Pressed)
+                this.DragMove();
         }
 
         private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -80,6 +80,13 @@ namespace ShoesStore
         {
             TrainsitionigContentSlide.OnApplyTemplate();
             GridCursor.Margin = new Thickness(0, (100 + (60 * index)), 0, 0);
+        }
+
+        private void btnQuit_Click(object sender, RoutedEventArgs e)
+        {
+            SignInView login = new SignInView();
+            login.Show();
+            this.Close();
         }
     }
 }

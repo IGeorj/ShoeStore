@@ -80,7 +80,7 @@ namespace ShoesStore.ViewModels
                 }
                 db.SaveChanges();
             }
-            LoadDataAsync();
+            SearchUser(_searchedText);
         }
         public UsersViewModel()
         {
@@ -92,6 +92,7 @@ namespace ShoesStore.ViewModels
         {
             using (ApplicationContext db = new ApplicationContext())
             {
+                _searchedText = "";
                 var items = await Task.Run(() => db.Users.ToListAsync());
                 Users = new ObservableCollection<User>(items);
             }

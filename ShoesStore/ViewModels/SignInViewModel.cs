@@ -1,16 +1,19 @@
-﻿using ShoesStore.Models;
+﻿using ShoesStore.Commands;
+using ShoesStore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using System.Windows.Input;
 
 namespace ShoesStore.ViewModels
 {
-    public class MainWindowModel : BaseViewModel
+    public class SignInViewModel : BaseViewModel
     {
-        private BaseViewModel _selectedViewModel;
+        public ICommand UpdateViewCommand { get; set; }
 
+        private BaseViewModel _selectedViewModel = new LoginViewModel();
         public BaseViewModel SelectedViewModel
         {
             get { return _selectedViewModel; }
@@ -20,6 +23,9 @@ namespace ShoesStore.ViewModels
                 OnPropertyChanged(nameof(SelectedViewModel));
             }
         }
-        public ICommand UpdateViewCommand { get; set; }
+        public SignInViewModel()
+        {
+            UpdateViewCommand = new UpdateSignInViewCommand(this);
+        }
     }
 }

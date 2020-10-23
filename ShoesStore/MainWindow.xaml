@@ -8,7 +8,7 @@
         mc:Ignorable="d" Height="600" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" >
     <Grid Background="#FFEEEEEE" MouseDown="Grid_MouseDown">
         <StackPanel VerticalAlignment="Top">
-            <Grid Background="#FF0069C0" Height="10"/>
+            <Grid Background="#FF7A00C0" Height="10"/>
             <Grid Margin="5">
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <TextBlock Text="Contacts" VerticalAlignment="Center" FontSize="20" FontFamily="Champagne &amp; Limousines" Margin="20 0"/>
@@ -29,20 +29,28 @@
                     <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray" Margin="0 0 10 0">
                         <materialDesign:PackIcon Kind="Settings"/>
                     </Button>
-                    <Button x:Name="ButtonFechar" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray" Click="ButtonFechar_Click">
+                    <Button x:Name="btnQuit" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray" Click="btnQuit_Click">
                         <materialDesign:PackIcon Kind="Power"/>
                     </Button>
                 </StackPanel>
             </Grid>
         </StackPanel>
 
-        <ContentControl Content="{Binding SelectedViewModel }" Margin="250 55 0 0">
+        <ContentControl Content="{Binding SelectedViewModel}" Margin="250 55 0 0">
         </ContentControl>
 
-        <Grid Width="250" HorizontalAlignment="Left" Background="#FF222222">
+        <Grid Width="250" HorizontalAlignment="Left" Background="#FF191919">
             <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.2}">
-                <Grid x:Name="GridCursor" Margin="0 100 0 0" Background="#FF0069C0" Width="10" HorizontalAlignment="Left" Height="60" VerticalAlignment="Top"/>
+                <Grid x:Name="GridCursor" Margin="0 100 0 0" Background="#FF7A00C0" Width="10" HorizontalAlignment="Left" Height="60" VerticalAlignment="Top"/>
             </materialDesign:TransitioningContent>
+            <materialDesign:PackIcon Kind="ShoeSneaker" Width="80" Height="80" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5">
+                <materialDesign:PackIcon.Foreground>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="2,0">
+                        <GradientStop Color="#FF30185B" Offset="0.9"/>
+                        <GradientStop Color="#FF1FCC88" Offset="0.345"/>
+                    </LinearGradientBrush>
+                </materialDesign:PackIcon.Foreground>
+            </materialDesign:PackIcon>
             <ListView x:Name="ListViewMenu" Margin="0 100" Foreground="LightGray" FontFamily="Champagne &amp; Limousines" FontSize="18" SelectionChanged="ListViewMenu_SelectionChanged" SelectedIndex="0">
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">

@@ -6,11 +6,10 @@ using System.Windows.Input;
 
 namespace ShoesStore.Commands
 {
-    public class UpdateViewCommand : ICommand
+    class UpdateSignInViewCommand : ICommand
     {
-        //TODO DRY Refactoring
-        private MainWindowModel viewModel;
-        public UpdateViewCommand(MainWindowModel viewModel)
+        private SignInViewModel viewModel;
+        public UpdateSignInViewCommand(SignInViewModel viewModel)
         {
             this.viewModel = viewModel;
         }
@@ -26,12 +25,9 @@ namespace ShoesStore.Commands
         {
             viewModel.SelectedViewModel = (parameter.ToString()) switch
             {
-                "Home" => new HomeViewModel(),
-                "Store" => new StoreViewModel(),
-                "Users" => new UsersViewModel(),
-                "Login" => new SignInViewModel(),
+                "Login" => new LoginViewModel(),
                 "Registration" => new RegistrationViewModel(),
-                _ => new HomeViewModel(),
+                _ => new LoginViewModel(),
             };
         }
     }
