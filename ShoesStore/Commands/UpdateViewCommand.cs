@@ -29,8 +29,7 @@ namespace ShoesStore.Commands
                 "Home" => new HomeViewModel(),
                 "Store" => new StoreViewModel(),
                 "Users" => new UsersViewModel(),
-                "Login" => new SignInViewModel(),
-                "Registration" => new RegistrationViewModel(),
+                "Orders" => new OrdersViewModel(),
                 _ => new HomeViewModel(),
             };
         }

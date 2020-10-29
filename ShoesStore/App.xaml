@@ -16,6 +16,9 @@
             <DataTemplate DataType="{x:Type viewmodels:UsersViewModel}">
                 <views:UsersView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewmodels:OrdersViewModel}">
+                <views:OrdersView/>
+            </DataTemplate>
             <DataTemplate DataType="{x:Type viewmodels:LoginViewModel}">
                 <views:LoginView/>
             </DataTemplate>
