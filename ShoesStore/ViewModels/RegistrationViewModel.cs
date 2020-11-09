@@ -13,7 +13,21 @@ namespace ShoesStore.ViewModels
 {
     public class RegistrationViewModel : BaseViewModel
     {
-        public ICommand CreateUserCommand { get; set; }
+        public Action RegisterAction { get; set; }
+
+        private RelayCommand _createUserCommand;
+
+        public RelayCommand CreateUserCommand
+        {
+            get
+            {
+                return _createUserCommand ??
+                  (_createUserCommand = new RelayCommand(obj =>
+                  {
+                      Register();
+                  }));
+            }
+        }
         private string _name;
         public string Name
         {
@@ -67,11 +81,11 @@ namespace ShoesStore.ViewModels
             {
                 db.Users.Add(new User { Login = Login, Name = Name, Password = Password, Proffesion = "Seller" });
                 db.SaveChanges();
+                RegisterAction();
             }
         }
         public RegistrationViewModel()
         {
-            CreateUserCommand = new CreateUserCommand(this);
         }
     }
 }

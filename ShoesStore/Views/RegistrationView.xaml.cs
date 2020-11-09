@@ -24,8 +24,18 @@ namespace ShoesStore.Views
         {
             InitializeComponent();
             DataContext = rvm;
+            if (rvm.RegisterAction == null)
+            {
+                rvm.RegisterAction = new Action(() => Clear());
+            }
         }
-
+        public void Clear()
+        {
+            NameBox.Text = "";
+            UsernameBox.Text = "";
+            PasswordBox.Password = "";
+            ConfirmPasswordBox.Password = "";
+        }
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
             rvm.Password = PasswordBox.Password;

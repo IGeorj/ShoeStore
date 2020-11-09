@@ -1,18 +1,7 @@
-﻿using ShoesStore.Models;
-using ShoesStore.ViewModels;
+﻿using ShoesStore.ViewModels;
 using ShoesStore.Views.Dialogs;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ShoesStore.Views
 {
@@ -21,7 +10,8 @@ namespace ShoesStore.Views
     /// </summary>
     public partial class StoreView : UserControl
     {
-        StoreViewModel viewModel = new StoreViewModel();
+        private StoreViewModel viewModel = new StoreViewModel();
+
         public StoreView()
         {
             InitializeComponent();
@@ -31,9 +21,9 @@ namespace ShoesStore.Views
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             AddProductView addProductView = new AddProductView();
-            if(addProductView.ShowDialog() == true)
+            if (addProductView.ShowDialog() == true)
             {
-                viewModel.LoadDataAsync();
+                viewModel.LoadData();
             }
         }
 
@@ -42,6 +32,17 @@ namespace ShoesStore.Views
             ListBoxItem selectedItem = (ListBoxItem)listboxProducts.ItemContainerGenerator.
                                ContainerFromItem(((Button)sender).DataContext);
             selectedItem.IsSelected = true;
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            ListBoxItem selectedItem = (ListBoxItem)listboxProducts.ItemContainerGenerator.
+                               ContainerFromItem(((Button)sender).DataContext);
+            selectedItem.IsSelected = true;
+            EditProductView editProduct = new EditProductView();
+            editProduct.DataContext = new EditProductViewModel();
+            ((EditProductViewModel)editProduct.DataContext).Product = viewModel.SelectedProduct;
+            editProduct.ShowDialog();
         }
     }
 }

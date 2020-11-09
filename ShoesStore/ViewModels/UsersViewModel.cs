@@ -14,7 +14,19 @@ namespace ShoesStore.ViewModels
 {
     public class UsersViewModel : BaseViewModel
     {
-        public ICommand DeleteUserCommand { get; set; }
+        private RelayCommand _deleteUserCommand;
+
+        public RelayCommand DeleteUserCommand
+        {
+            get
+            {
+                return _deleteUserCommand ??
+                  (_deleteUserCommand = new RelayCommand(obj =>
+                  {
+                      DeleteUser();
+                  }));
+            }
+        }
 
         public ICommand ChangeProfCommand { get; set; }
 
@@ -99,7 +111,6 @@ namespace ShoesStore.ViewModels
         }
         public UsersViewModel()
         {
-            DeleteUserCommand = new DeleteUserCommand(this);
             ChangeProfCommand = new ChangeProfCommand(this);
             LoadDataAsync();
         }
