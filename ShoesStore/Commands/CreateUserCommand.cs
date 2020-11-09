@@ -9,11 +9,11 @@ using System.Windows.Media;
 
 namespace ShoesStore.Commands
 {
-    class CreateAccCommand : ICommand
+    class CreateUserCommand : ICommand
     {
         RegistrationViewModel viewModel;
 
-        public CreateAccCommand(RegistrationViewModel viewModel)
+        public CreateUserCommand(RegistrationViewModel viewModel)
         {
             this.viewModel = viewModel;
         }
@@ -27,14 +27,7 @@ namespace ShoesStore.Commands
 
         public void Execute(object parameter)
         {
-            var passwordBox = parameter as PasswordBox;
-            if (passwordBox == null || MaterialDesignThemes.Wpf.TextFieldAssist.GetUnderlineBrush(passwordBox) == Brushes.Red)
-            {
-                MessageBox.Show("Поля");
-                return;
-            }
-            viewModel.Password = passwordBox.Password;
-            viewModel.Register(viewModel.Password);
+            viewModel.Register();
         }
     }
 }

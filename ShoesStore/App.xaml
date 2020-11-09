@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:ShoesStore"
              xmlns:views="clr-namespace:ShoesStore.Views"
              xmlns:viewmodels="clr-namespace:ShoesStore.ViewModels"
-             StartupUri="MainWindow.xaml">
+             StartupUri="Views/SignInView.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">

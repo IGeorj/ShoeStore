@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Navigation;
 
@@ -12,7 +13,7 @@ namespace ShoesStore.ViewModels
 {
     public class RegistrationViewModel : BaseViewModel
     {
-        public ICommand CreateAccCommand { get; set; }
+        public ICommand CreateUserCommand { get; set; }
         private string _name;
         public string Name
         {
@@ -44,21 +45,33 @@ namespace ShoesStore.ViewModels
                 OnPropertyChanged();
             }
         }
-        public void Register(string password)
+        private string _confirmPassword;
+
+        public string ConfirmPassword
         {
-            if(string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(Login) || string.IsNullOrEmpty(Password))
+            get => _confirmPassword;
+            set
             {
+                _confirmPassword = value;
+                OnPropertyChanged();
+            }
+        }
+        public void Register()
+        {
+            if(string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(Login) || string.IsNullOrEmpty(ConfirmPassword) || string.IsNullOrEmpty(Name) || Password != ConfirmPassword)
+            {
+                MessageBox.Show("Please verify this");
                 return;
             }
             using (ApplicationContext db = new ApplicationContext())
             {
-                db.Users.Add(new User { Login = Login, Name = Name, Password = password, Proffesion = "Seller" });
+                db.Users.Add(new User { Login = Login, Name = Name, Password = Password, Proffesion = "Seller" });
                 db.SaveChanges();
             }
         }
         public RegistrationViewModel()
         {
-            CreateAccCommand = new CreateAccCommand(this);
+            CreateUserCommand = new CreateUserCommand(this);
         }
     }
 }

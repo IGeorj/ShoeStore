@@ -7,12 +7,12 @@
              xmlns:local="clr-namespace:ShoesStore.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="350">
-    <StackPanel Width="350">
+    <StackPanel Width="350" KeyDown="Login_KeyDown">
         <StackPanel Margin="20 40 20 0">
             <TextBlock Text="User Login" Margin="20" Foreground="White" TextAlignment="Center" FontSize="38" FontFamily="Great Vibes"></TextBlock>
-            <StackPanel Orientation="Horizontal" Margin="10">
+            <StackPanel Orientation="Horizontal" Margin="10" FocusManager.FocusedElement="{Binding ElementName=UsernameBox}">
                 <materialDesign:PackIcon Kind="User" Width="25" Height="25" Foreground="White"/>
-                <TextBox x:Name="UsernameBox" Text="{Binding Login}" Margin="10 0" materialDesign:HintAssist.Hint="Enter Login / Email" Foreground="White" Width="250" BorderBrush="White" CaretBrush="#FF7231E5" SelectionBrush="#FF7230E6" />
+                <TextBox Focusable="True" x:Name="UsernameBox" Text="{Binding Login}" Margin="10 0" materialDesign:HintAssist.Hint="Enter Login / Email" Foreground="White" Width="250" BorderBrush="White" CaretBrush="#FF7231E5" SelectionBrush="#FF7230E6" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="10">
                 <materialDesign:PackIcon Kind="Lock" Width="25" Height="25" Foreground="White"/>

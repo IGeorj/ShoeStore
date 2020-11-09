@@ -1,45 +1,71 @@
 ﻿<UserControl x:Class="ShoesStore.Views.StoreView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:local="clr-namespace:ShoesStore.Views" 
-             mc:Ignorable="d" 
+             xmlns:local="clr-namespace:ShoesStore.Views"
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ScrollViewer Grid.Column="1" Grid.Row="1" Background="#FFF1F1F1">
+        <ScrollViewer Margin="0 45 0 0" Background="#FFF1F1F1">
             <StackPanel>
                 <StackPanel Margin="20 0">
-                    <ItemsControl x:Name="ListViewProducts" ItemsSource="{Binding Products}">
-                        <ItemsControl.ItemTemplate>
+                    <ListBox x:Name="listboxProducts" ItemsSource="{Binding Products}" SelectedItem="{Binding SelectedProduct}">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="3" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Border Margin="10" Width="200" Height="250">
-                                    <StackPanel>
+                                <Border Margin="10" Width="200" Height="230">
+                                    <StackPanel Orientation="Vertical">
+                                        <StackPanel Margin="0 -5 -10 -100" HorizontalAlignment="Right">
+                                            <Button x:Name="btnDelete" Click="btnDelete_Click" Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding DataContext.DeleteProductCommand, RelativeSource={ RelativeSource AncestorType={x:Type ListBox} } }">
+                                                <materialDesign:PackIcon Foreground="Black" Kind="Delete" HorizontalAlignment="Right" />
+                                            </Button>
+                                            <Button x:Name="btnChange" Background="{x:Null}" BorderBrush="{x:Null}">
+                                                <materialDesign:PackIcon Foreground="Black" Kind="Edit" HorizontalAlignment="Right" />
+                                            </Button>
+                                        </StackPanel>
                                         <Border Width="100" Height="100" CornerRadius="5" Margin="5">
                                             <Border.Effect>
-                                                <DropShadowEffect ShadowDepth="1"/>
+                                                <DropShadowEffect ShadowDepth="1" />
                                             </Border.Effect>
                                             <Border.Background>
-                                                <ImageBrush Stretch="Uniform" ImageSource="{Binding Image}"/>
+                                                <ImageBrush Stretch="Uniform" ImageSource="{Binding Image}" />
                                             </Border.Background>
                                         </Border>
-                                        <TextBlock Margin="5 0" Text="{Binding Type}" FontSize="15"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Margin="5 0" Text="{Binding Company.Name}" FontSize="20" />
+                                            <TextBlock Text="{Binding Name, StringFormat=\'{0}\'}" FontSize="20" />
+                                        </StackPanel>
                                         <TextBlock Margin="5" Text="{Binding Price, StringFormat={}Price: {0:C}}" FontSize="17" FontWeight="Bold" />
-                                        <TextBlock Margin="5" Text="{Binding Quantity,StringFormat='{}In stock: {0}'}" FontSize="17"/>
+                                        <TextBlock Margin="5 0 0 5" Text="{Binding Quantity,StringFormat='{}In stock: {0}'}" FontSize="13" />
                                         <Button Content="Buy" Background="#FF22C68C" Foreground="White" BorderBrush="#FF1FCC88"></Button>
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                    </ItemsControl>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
+        <Button VerticalAlignment="Bottom" Margin="650 0 10 10" Name="btnAdd" Click="btnAdd_Click" Background="#FF7A00C0" BorderBrush="#FF7A00C0">
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Add" VerticalAlignment="Center" />
+                <TextBlock Text="Product" FontSize="13" VerticalAlignment="Center" />
+            </StackPanel>
+        </Button>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
+            <Button Margin="0 0 0 0" Width="80" Content="Male" Background="#FF7A00C0" BorderBrush="#FF7A00C0"></Button>
+            <Button Margin="5 0 200 0" Width="80" Content="Female" Background="#FF7A00C0" BorderBrush="#FF7A00C0"></Button>
+            <ComboBox Margin="0 0 0 0" materialDesign:HintAssist.Hint ="Select Category"></ComboBox>
+            <TextBox x:Name="SearchBox" materialDesign:TextFieldAssist.UnderlineBrush="#FF22C68C" Text="{Binding SearchedText, UpdateSourceTrigger=PropertyChanged}" Padding="0" FontSize="15" Margin="5" Width="200" Height="28" CaretBrush="#FF22C68C"></TextBox>
+            <Button x:Name='SearchButton' Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray">
+                <materialDesign:PackIcon Kind="Search" />
+            </Button>
+        </StackPanel>
     </Grid>
 </UserControl>

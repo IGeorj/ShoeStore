@@ -1,4 +1,6 @@
-﻿using ShoesStore.ViewModels;
+﻿using ShoesStore.Models;
+using ShoesStore.ViewModels;
+using ShoesStore.Views.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,11 +21,27 @@ namespace ShoesStore.Views
     /// </summary>
     public partial class StoreView : UserControl
     {
-        StoreViewModel svm = new StoreViewModel();
+        StoreViewModel viewModel = new StoreViewModel();
         public StoreView()
         {
             InitializeComponent();
-            DataContext = svm;
+            DataContext = viewModel;
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            AddProductView addProductView = new AddProductView();
+            if(addProductView.ShowDialog() == true)
+            {
+                viewModel.LoadDataAsync();
+            }
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            ListBoxItem selectedItem = (ListBoxItem)listboxProducts.ItemContainerGenerator.
+                               ContainerFromItem(((Button)sender).DataContext);
+            selectedItem.IsSelected = true;
         }
     }
 }

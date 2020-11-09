@@ -30,7 +30,7 @@
                         <materialDesign:PackIcon Kind="Settings"/>
                     </Button>
                     <Button x:Name="btnQuit" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray" Click="btnQuit_Click">
-                        <materialDesign:PackIcon Kind="Power"/>
+                        <materialDesign:PackIcon Kind="Logout"/>
                     </Button>
                 </StackPanel>
             </Grid>

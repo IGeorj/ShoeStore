@@ -3,15 +3,21 @@ using ShoesStore.Commands;
 using ShoesStore.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace ShoesStore.ViewModels
 {
     public class UsersViewModel : BaseViewModel
     {
+        public ICommand DeleteUserCommand { get; set; }
+
+        public ICommand ChangeProfCommand { get; set; }
+
         private User _selectedUser;
         public User SelectedUser
         {
@@ -33,7 +39,6 @@ namespace ShoesStore.ViewModels
                 OnPropertyChanged();
             }
         }
-
         private string _searchedText;
 
         public string SearchedText
@@ -46,10 +51,10 @@ namespace ShoesStore.ViewModels
                 SearchUser(_searchedText);
             }
         }
-        public ICommand ChangeProfCommand { get; set; }
 
         public void SearchUser(string text)
         {
+            //TODO CollectionView
             using (ApplicationContext db = new ApplicationContext())
             {
                 if (text == "")
@@ -63,6 +68,16 @@ namespace ShoesStore.ViewModels
                         x.Password.StartsWith(text) || x.Proffesion.StartsWith(text))
                         );
                 }
+            }
+        }
+        public void DeleteUser()
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.Users.Remove(SelectedUser);
+                db.SaveChanges();
+                Users.Remove(SelectedUser);
+                SearchUser(_searchedText);
             }
         }
         public void ChangeProf()
@@ -84,6 +99,7 @@ namespace ShoesStore.ViewModels
         }
         public UsersViewModel()
         {
+            DeleteUserCommand = new DeleteUserCommand(this);
             ChangeProfCommand = new ChangeProfCommand(this);
             LoadDataAsync();
         }

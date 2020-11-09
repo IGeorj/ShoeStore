@@ -29,7 +29,14 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Background="#FF22C68C" Foreground="White" x:Name="ChangeButton" Height="25" Width="70" FontSize="10" Padding="0" Command="{Binding DataContext.ChangeProfCommand, RelativeSource={ RelativeSource AncestorType={x:Type DataGrid} } }" BorderBrush="#FF1FCC88">Change Prof</Button>
+                            <Button Background="#FF22C68C" Foreground="White" x:Name="ChangeButton" Height="25" Width="70" FontSize="10" Padding="0" Command="{Binding DataContext.ChangeProfCommand, RelativeSource={ RelativeSource AncestorType={x:Type DataGrid} } }" BorderBrush="#FF1FCC88">Change</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Foreground="White" x:Name="DeleteButton" Height="25" Width="70" FontSize="10" Padding="0" Command="{Binding DataContext.DeleteUserCommand, RelativeSource={ RelativeSource AncestorType={x:Type DataGrid} } }" BorderBrush="#FFEA1818" Background="#FFEA1818">Delete</Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

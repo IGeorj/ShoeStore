@@ -1,16 +1,10 @@
-﻿using ShoesStore.ViewModels;
+﻿using ShoesStore.Commands;
+using ShoesStore.Models;
+using ShoesStore.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ShoesStore.Views
 {
@@ -19,14 +13,35 @@ namespace ShoesStore.Views
     /// </summary>
     public partial class LoginView : UserControl
     {
-        LoginViewModel lvm = new LoginViewModel();
+        private LoginViewModel lvm = new LoginViewModel();
 
         public LoginView()
         {
+            using ( ApplicationContext db = new ApplicationContext() )
+            {
+
+            }
             DataContext = lvm;
             InitializeComponent();
             if (lvm.LoginAction == null)
-                lvm.LoginAction = new Action(() => Window.GetWindow(this).Close());
+            {
+                lvm.LoginAction = new Action(() => Login());
+            }
+            UsernameBox.Focus();
+        }
+        public void Login()
+        {
+            MainWindow mv = new MainWindow();
+            mv.Show();
+            Window.GetWindow(this).Close();
+        }
+        private void Login_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                LoginCommand loginCommand = new LoginCommand(lvm);
+                loginCommand.Execute(PasswordBox);
+            }
         }
     }
 }

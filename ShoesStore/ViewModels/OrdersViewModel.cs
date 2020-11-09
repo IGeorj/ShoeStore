@@ -12,14 +12,14 @@ namespace ShoesStore.ViewModels
 {
     public class OrdersViewModel : BaseViewModel
     {
-        private ObservableCollection<OrderDetail> _orderDetails;
+        private ObservableCollection<Order> _orders;
 
-        public ObservableCollection<OrderDetail> OrderDetails
+        public ObservableCollection<Order> Orders
         {
-            get { return _orderDetails; }
+            get { return _orders; }
             set
             {
-                _orderDetails = value;
+                _orders = value;
                 OnPropertyChanged();
             }
         }
@@ -28,7 +28,7 @@ namespace ShoesStore.ViewModels
             using (ApplicationContext db = new ApplicationContext())
             {
                 db.SaveChanges();
-                OrderDetails = new ObservableCollection<OrderDetail>(db.OrderDetails.Include("Order.User").ToList());
+                Orders = new ObservableCollection<Order>(db.Orders.Include("User").ToList());
             }
         }
     }

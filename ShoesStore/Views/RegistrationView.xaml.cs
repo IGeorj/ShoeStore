@@ -28,7 +28,8 @@ namespace ShoesStore.Views
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("CLicked");
+            rvm.Password = PasswordBox.Password;
+            rvm.ConfirmPassword = ConfirmPasswordBox.Password;
             if (string.IsNullOrEmpty(NameBox.Text))
             {
                 NameBox.Focus();
