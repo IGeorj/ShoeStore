@@ -2,25 +2,21 @@
 using ShoesStore.Models;
 using ShoesStore.ViewModels;
 using ShoesStore.Views;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace ShoesStore
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        private MainWindowModel mvd = new MainWindowModel();
+        private MainWindowModel viemodel = new MainWindowModel();
 
         public MainWindow()
         {
             InitializeComponent();
 
-            DataContext = mvd;
+            DataContext = viemodel;
             using (ApplicationContext db = new ApplicationContext())
             {
             }
@@ -36,7 +32,7 @@ namespace ShoesStore
         {
             int index = ListViewMenu.SelectedIndex;
             MoveCursorMenu(index);
-            UpdateViewCommand cmd = new UpdateViewCommand(mvd);
+            UpdateViewCommand cmd = new UpdateViewCommand(viemodel);
             switch (index)
             {
                 case 0:

@@ -5,32 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ShoesStore"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        mc:Ignorable="d" Height="600" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" >
+        mc:Ignorable="d" Height="600" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
     <Grid Background="#FFEEEEEE" MouseDown="Grid_MouseDown">
         <StackPanel VerticalAlignment="Top">
-            <Grid Background="#FF7A00C0" Height="10"/>
+            <Grid Background="#FF7A00C0" Height="10" />
             <Grid Margin="5">
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                    <TextBlock Text="Contacts" VerticalAlignment="Center" FontSize="20" FontFamily="Champagne &amp; Limousines" Margin="20 0"/>
+                    <TextBlock Text="Contacts" VerticalAlignment="Center" FontSize="20" FontFamily="Champagne &amp; Limousines" Margin="20 0" />
                     <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray">
-                        <materialDesign:PackIcon Kind="Facebook"/>
+                        <materialDesign:PackIcon Kind="Facebook" />
                     </Button>
                     <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray">
-                        <materialDesign:PackIcon Kind="Twitter"/>
+                        <materialDesign:PackIcon Kind="Twitter" />
                     </Button>
                     <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray">
-                        <materialDesign:PackIcon Kind="Instagram"/>
+                        <materialDesign:PackIcon Kind="Instagram" />
                     </Button>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10 0">
                     <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray">
-                        <materialDesign:PackIcon Kind="BellOutline"/>
+                        <materialDesign:PackIcon Kind="BellOutline" />
                     </Button>
                     <Button Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray" Margin="0 0 10 0">
-                        <materialDesign:PackIcon Kind="Settings"/>
+                        <materialDesign:PackIcon Kind="Settings" />
                     </Button>
                     <Button x:Name="btnQuit" Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray" Click="btnQuit_Click">
-                        <materialDesign:PackIcon Kind="Logout"/>
+                        <materialDesign:PackIcon Kind="Logout" />
                     </Button>
                 </StackPanel>
             </Grid>
@@ -41,56 +41,54 @@
 
         <Grid Width="250" HorizontalAlignment="Left" Background="#FF191919">
             <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.2}">
-                <Grid x:Name="GridCursor" Margin="0 100 0 0" Background="#FF7A00C0" Width="10" HorizontalAlignment="Left" Height="60" VerticalAlignment="Top"/>
+                <Grid x:Name="GridCursor" Margin="0 100 0 0" Background="#FF7A00C0" Width="10" HorizontalAlignment="Left" Height="60" VerticalAlignment="Top" />
             </materialDesign:TransitioningContent>
             <materialDesign:PackIcon Kind="ShoeSneaker" Width="80" Height="80" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5">
                 <materialDesign:PackIcon.Foreground>
                     <LinearGradientBrush EndPoint="0,1" StartPoint="2,0">
-                        <GradientStop Color="#FF30185B" Offset="0.9"/>
-                        <GradientStop Color="#FF1FCC88" Offset="0.345"/>
+                        <GradientStop Color="#FF30185B" Offset="0.9" />
+                        <GradientStop Color="#FF1FCC88" Offset="0.345" />
                     </LinearGradientBrush>
                 </materialDesign:PackIcon.Foreground>
             </materialDesign:PackIcon>
             <ListView x:Name="ListViewMenu" Margin="0 100" Foreground="LightGray" FontFamily="Champagne &amp; Limousines" FontSize="18" SelectionChanged="ListViewMenu_SelectionChanged" SelectedIndex="0">
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Home" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="Home" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                        <materialDesign:PackIcon Kind="Home" Width="30" Height="30" VerticalAlignment="Center" Margin="5" />
+                        <TextBlock Text="Home" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="ShoeSneaker" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="Store" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                        <materialDesign:PackIcon Kind="ShoeSneaker" Width="30" Height="30" VerticalAlignment="Center" Margin="5" />
+                        <TextBlock Text="Store" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Company" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="Company" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                        <materialDesign:PackIcon Kind="Company" Width="30" Height="30" VerticalAlignment="Center" Margin="5" />
+                        <TextBlock Text="Company" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Category" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="Category" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                        <materialDesign:PackIcon Kind="Category" Width="30" Height="30" VerticalAlignment="Center" Margin="5" />
+                        <TextBlock Text="Category" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Cash" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="Orders" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                        <materialDesign:PackIcon Kind="Cash" Width="30" Height="30" VerticalAlignment="Center" Margin="5" />
+                        <TextBlock Text="Orders" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
                     </StackPanel>
                 </ListViewItem>
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="AccountStar" Width="30" Height="30" VerticalAlignment="Center" Margin="5"/>
-                        <TextBlock Text="Users" FontSize="17" VerticalAlignment="Center" Margin="20 0"/>
+                        <materialDesign:PackIcon Kind="AccountStar" Width="30" Height="30" VerticalAlignment="Center" Margin="5" />
+                        <TextBlock Text="Users" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
                     </StackPanel>
                 </ListViewItem>
             </ListView>
         </Grid>
-
     </Grid>
 </Window>
-

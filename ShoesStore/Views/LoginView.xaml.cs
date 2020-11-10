@@ -2,23 +2,19 @@
 using ShoesStore.Models;
 using ShoesStore.ViewModels;
 using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace ShoesStore.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для LoginView.xaml
-    /// </summary>
     public partial class LoginView : UserControl
     {
-        private LoginViewModel lvm = new LoginViewModel();
+        private LoginViewModel viewModel = new LoginViewModel();
 
         public LoginView()
         {
-            using ( ApplicationContext db = new ApplicationContext() )
+            using (ApplicationContext db = new ApplicationContext())
             {
                 ////DB Initialization
                 //db.Users.Add(new User { Login = "admin", Email = "admin", Password = "admin", Name = "admin", Proffesion = "Admin" });
@@ -56,27 +52,34 @@ namespace ShoesStore.Views
                 //}
                 //db.SaveChanges();
             }
-            DataContext = lvm;
+            DataContext = viewModel;
             InitializeComponent();
-            if (lvm.LoginAction == null)
+            if (viewModel.LoginAction == null)
             {
-                lvm.LoginAction = new Action(() => Login());
+                viewModel.LoginAction = new Action(() => Login());
             }
             UsernameBox.Focus();
         }
+
         public void Login()
         {
             MainWindow mv = new MainWindow();
             mv.Show();
             Window.GetWindow(this).Close();
         }
+
         private void Login_KeyDown(object sender, KeyEventArgs e)
         {
+            viewModel.Password = PasswordBox.Password;
             if (e.Key == Key.Enter)
             {
-                LoginCommand loginCommand = new LoginCommand(lvm);
-                loginCommand.Execute(PasswordBox);
+                viewModel.LoginCommand.Execute(sender);
             }
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            viewModel.Password = PasswordBox.Password;
         }
     }
 }

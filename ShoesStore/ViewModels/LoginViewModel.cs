@@ -1,21 +1,31 @@
 ﻿using ShoesStore.Commands;
 using ShoesStore.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
-using System.Windows.Input;
 
 namespace ShoesStore.ViewModels
 {
     public class LoginViewModel : BaseViewModel
     {
-        public ICommand LoginCommand { get; set; }
+        private RelayCommand _LoginCommand;
+
+        public RelayCommand LoginCommand
+        {
+            get
+            {
+                return _LoginCommand ??
+                  (_LoginCommand = new RelayCommand(obj =>
+                  {
+                      LoginAcc();
+                  }));
+            }
+        }
+
         public Action LoginAction { get; set; }
 
-
         private string _login;
+
         public string Login
         {
             get { return _login; }
@@ -25,6 +35,7 @@ namespace ShoesStore.ViewModels
                 OnPropertyChanged();
             }
         }
+
         private string _password;
 
         public string Password
@@ -36,14 +47,15 @@ namespace ShoesStore.ViewModels
                 OnPropertyChanged();
             }
         }
-        public void LogIn(string password)
+
+        public void LoginAcc()
         {
             using (ApplicationContext db = new ApplicationContext())
             {
                 var user = db.Users.FirstOrDefault(x => (x.Login == Login || x.Email == Login));
                 if (user != null)
                 {
-                    if (user.Password == password)
+                    if (user.Password == Password)
                     {
                         LoginAction();
                     }
@@ -58,9 +70,9 @@ namespace ShoesStore.ViewModels
                 }
             }
         }
+
         public LoginViewModel()
         {
-            LoginCommand = new LoginCommand(this);
         }
     }
 }

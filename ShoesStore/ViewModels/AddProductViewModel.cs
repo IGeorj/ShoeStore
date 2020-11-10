@@ -5,19 +5,18 @@ using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace ShoesStore.ViewModels
 {
+    public enum SexType
+    {
+        Male,
+        Female
+    }
+
     public class AddProductViewModel : BaseViewModel
     {
-        public enum SexType
-        {
-            Male,
-            Female
-        }
-
         private SexType _sex = SexType.Male;
 
         public SexType Sex
@@ -29,7 +28,7 @@ namespace ShoesStore.ViewModels
                     return;
 
                 _sex = value;
-                OnPropertyChanged("SexType");
+                OnPropertyChanged("Sex");
                 OnPropertyChanged("IsFemale");
                 OnPropertyChanged("IsMale");
             }
@@ -46,7 +45,25 @@ namespace ShoesStore.ViewModels
             get { return Sex == SexType.Female; }
             set { Sex = value ? SexType.Female : Sex; }
         }
+
+        public string GetSexType
+        {
+            get
+            {
+                switch (Sex)
+                {
+                    case SexType.Male:
+                        return "Male";
+
+                    case SexType.Female:
+                        return "Female";
+                }
+                return "";
+            }
+        }
+
         private string _name;
+
         public string Name
         {
             get => _name;
@@ -56,7 +73,9 @@ namespace ShoesStore.ViewModels
                 OnPropertyChanged();
             }
         }
+
         private int? _price;
+
         public int? Price
         {
             get => _price;
@@ -66,7 +85,9 @@ namespace ShoesStore.ViewModels
                 OnPropertyChanged();
             }
         }
+
         private int? _quantity;
+
         public int? Quantity
         {
             get => _quantity;
@@ -76,6 +97,7 @@ namespace ShoesStore.ViewModels
                 OnPropertyChanged();
             }
         }
+
         private BitmapImage image;
 
         public BitmapImage Image
@@ -87,6 +109,7 @@ namespace ShoesStore.ViewModels
                 OnPropertyChanged();
             }
         }
+
         private ObservableCollection<Company> _companies;
 
         public ObservableCollection<Company> Companies
@@ -153,25 +176,15 @@ namespace ShoesStore.ViewModels
             }
         }
 
-
         public void AddProduct()
         {
             if (Image == null || SelectedCategory == null || SelectedCompany == null || string.IsNullOrEmpty(Name) || Price == 0)
             {
                 return;
             }
-            string sex;
-            if(Sex == SexType.Male)
-            {
-                sex = "Male";
-            }
-            else
-            {
-                sex = "Female";
-            }
             using (ApplicationContext db = new ApplicationContext())
             {
-                db.Products.Add(new Product { Image = $"{Image.UriSource}", Name = Name, Company = db.Companies.FirstOrDefault(x => x.Name == SelectedCompany.Name), Category = db.Categories.FirstOrDefault(x => x.Name == SelectedCategory.Name), Price = (int)Price, Quantity = (int)Quantity, Type = sex});
+                db.Products.Add(new Product { Image = $"{Image.UriSource}", Name = Name, Company = db.Companies.FirstOrDefault(x => x.Name == SelectedCompany.Name), Category = db.Categories.FirstOrDefault(x => x.Name == SelectedCategory.Name), Price = (int)Price, Quantity = (int)Quantity, Type = GetSexType });
                 db.SaveChanges();
             }
         }

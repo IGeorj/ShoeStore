@@ -1,30 +1,16 @@
-﻿using ShoesStore.Models;
-using ShoesStore.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
+﻿using ShoesStore.ViewModels;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ShoesStore.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для UsersView.xaml
-    /// </summary>
     public partial class UsersView : UserControl
     {
-        UsersViewModel uvm = new UsersViewModel();
+        private UsersViewModel viewModel = new UsersViewModel();
+
         public UsersView()
         {
             InitializeComponent();
-            DataContext = uvm;
+            DataContext = viewModel;
         }
     }
 }

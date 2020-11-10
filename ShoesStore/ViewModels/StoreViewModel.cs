@@ -38,7 +38,10 @@ namespace ShoesStore.ViewModels
 
         public Product SelectedProduct
         {
-            get => _selectedProduct;
+            get
+            {
+                return _selectedProduct;
+            }
             set
             {
                 _selectedProduct = value;
@@ -47,6 +50,16 @@ namespace ShoesStore.ViewModels
         }
 
         private ObservableCollection<Product> _originalProduct { get; set; }
+
+        public ObservableCollection<Product> OriginalProducts
+        {
+            get { return _originalProduct; }
+            set
+            {
+                _originalProduct = value;
+                OnPropertyChanged();
+            }
+        }
 
         private ObservableCollection<Product> _products;
 
@@ -132,7 +145,7 @@ namespace ShoesStore.ViewModels
             {
                 return;
             }
-            Products = new ObservableCollection<Product>(Products.Where(x => x.Category == SelectedCategory));
+            Products = new ObservableCollection<Product>(Products.Where(x => x.Category.Name == SelectedCategory.Name));
         }
 
         public StoreViewModel()
@@ -144,12 +157,20 @@ namespace ShoesStore.ViewModels
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                var items1 = db.Products.Include("Company").ToList();
-                Products = new ObservableCollection<Product>(items1);
+                Products = new ObservableCollection<Product>(db.Products.Include("Company").Include("Category").ToList());
                 _originalProduct = new ObservableCollection<Product>(Products);
-                var items2 = db.Categories.ToList();
-                Categories = new ObservableCollection<Category>(items2);
+                Categories = new ObservableCollection<Category>(db.Categories.ToList());
             }
+        }
+
+        public void Refresh()
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Products = new ObservableCollection<Product>(db.Products.Include("Company").Include("Category").ToList());
+                _originalProduct = new ObservableCollection<Product>(Products);
+            }
+            Filter();
         }
     }
 }

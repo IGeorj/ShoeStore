@@ -1,14 +1,13 @@
 ﻿using ShoesStore.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 
 namespace ShoesStore.Commands
 {
-    class UpdateSignInViewCommand : ICommand
+    internal class UpdateSignInViewCommand : ICommand
     {
         private SignInViewModel viewModel;
+
         public UpdateSignInViewCommand(SignInViewModel viewModel)
         {
             this.viewModel = viewModel;

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -9,7 +7,7 @@ namespace ShoesStore
 {
     public class PasswordValidator : FrameworkElement
     {
-        static IDictionary<PasswordBox, Brush> _passwordBoxes = new Dictionary<PasswordBox, Brush>();
+        private static IDictionary<PasswordBox, Brush> _passwordBoxes = new Dictionary<PasswordBox, Brush>();
 
         public static readonly DependencyProperty Box1Property = DependencyProperty.Register("Box1", typeof(PasswordBox), typeof(PasswordValidator), new PropertyMetadata(Box1Changed));
         public static readonly DependencyProperty Box2Property = DependencyProperty.Register("Box2", typeof(PasswordBox), typeof(PasswordValidator), new PropertyMetadata(Box2Changed));
@@ -19,6 +17,7 @@ namespace ShoesStore
             get { return (PasswordBox)GetValue(Box1Property); }
             set { SetValue(Box1Property, value); }
         }
+
         public PasswordBox Box2
         {
             get { return (PasswordBox)GetValue(Box2Property); }
@@ -28,6 +27,7 @@ namespace ShoesStore
         private static void Box1Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
         }
+
         private static void Box2Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var pv = (PasswordValidator)d;
@@ -42,7 +42,7 @@ namespace ShoesStore
                 else
                 {
                     pv.Box2.BorderBrush = _passwordBoxes[pv.Box2];
-                    MaterialDesignThemes.Wpf.TextFieldAssist.SetUnderlineBrush(pv.Box2, new SolidColorBrush(Color.FromRgb(34,198,140)));
+                    MaterialDesignThemes.Wpf.TextFieldAssist.SetUnderlineBrush(pv.Box2, new SolidColorBrush(Color.FromRgb(34, 198, 140)));
                 }
             };
         }

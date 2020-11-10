@@ -1,11 +1,11 @@
 ﻿<UserControl x:Class="ShoesStore.Views.OrdersView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:ShoesStore.Views"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
@@ -15,7 +15,7 @@
         <StackPanel HorizontalAlignment="Right" Grid.Row="0" Orientation="Horizontal">
             <TextBox x:Name="SearchBox" materialDesign:TextFieldAssist.UnderlineBrush="#FF22C68C" Text="{Binding SearchedText, UpdateSourceTrigger=PropertyChanged}" Padding="2" FontSize="17" Margin="5" Width="200" CaretBrush="#FF22C68C"></TextBox>
             <Button x:Name='SearchButton' Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray">
-                <materialDesign:PackIcon Kind="Search"/>
+                <materialDesign:PackIcon Kind="Search" />
             </Button>
         </StackPanel>
 

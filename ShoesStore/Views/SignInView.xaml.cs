@@ -4,17 +4,14 @@ using System.Windows.Input;
 
 namespace ShoesStore.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для LoginView.xaml
-    /// </summary>
     public partial class SignInView : Window
     {
-        private SignInViewModel svm = new SignInViewModel();
+        private SignInViewModel viewModel = new SignInViewModel();
 
         public SignInView()
         {
             InitializeComponent();
-            DataContext = svm;
+            DataContext = viewModel;
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)

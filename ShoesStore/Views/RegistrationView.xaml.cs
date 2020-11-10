@@ -1,34 +1,24 @@
 ﻿using ShoesStore.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ShoesStore.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для RegistrationView.xaml
-    /// </summary>
     public partial class RegistrationView : UserControl
     {
-        RegistrationViewModel rvm = new RegistrationViewModel();
+        private RegistrationViewModel viewModel = new RegistrationViewModel();
+
         public RegistrationView()
         {
             InitializeComponent();
-            DataContext = rvm;
-            if (rvm.RegisterAction == null)
+            DataContext = viewModel;
+            if (viewModel.RegisterAction == null)
             {
-                rvm.RegisterAction = new Action(() => Clear());
+                viewModel.RegisterAction = new Action(() => Clear());
             }
         }
+
         public void Clear()
         {
             NameBox.Text = "";
@@ -36,10 +26,11 @@ namespace ShoesStore.Views
             PasswordBox.Password = "";
             ConfirmPasswordBox.Password = "";
         }
+
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            rvm.Password = PasswordBox.Password;
-            rvm.ConfirmPassword = ConfirmPasswordBox.Password;
+            viewModel.Password = PasswordBox.Password;
+            viewModel.ConfirmPassword = ConfirmPasswordBox.Password;
             if (string.IsNullOrEmpty(NameBox.Text))
             {
                 NameBox.Focus();
@@ -50,7 +41,7 @@ namespace ShoesStore.Views
                 UsernameBox.Focus();
                 return;
             }
-            if(string.IsNullOrEmpty(PasswordBox.Password))
+            if (string.IsNullOrEmpty(PasswordBox.Password))
             {
                 PasswordBox.Focus();
             }

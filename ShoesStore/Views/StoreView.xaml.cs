@@ -5,9 +5,6 @@ using System.Windows.Controls;
 
 namespace ShoesStore.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для StoreView.xaml
-    /// </summary>
     public partial class StoreView : UserControl
     {
         private StoreViewModel viewModel = new StoreViewModel();
@@ -23,7 +20,7 @@ namespace ShoesStore.Views
             AddProductView addProductView = new AddProductView();
             if (addProductView.ShowDialog() == true)
             {
-                viewModel.LoadData();
+                viewModel.Refresh();
             }
         }
 
@@ -40,9 +37,11 @@ namespace ShoesStore.Views
                                ContainerFromItem(((Button)sender).DataContext);
             selectedItem.IsSelected = true;
             EditProductView editProduct = new EditProductView();
-            editProduct.DataContext = new EditProductViewModel();
-            ((EditProductViewModel)editProduct.DataContext).Product = viewModel.SelectedProduct;
-            editProduct.ShowDialog();
+            editProduct.DataContext = new EditProductViewModel(viewModel.SelectedProduct.Id);
+            if (editProduct.ShowDialog() == true)
+            {
+                viewModel.Refresh();
+            }
         }
     }
 }
