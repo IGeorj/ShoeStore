@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:ShoesStore.Views.Dialogs"
         mc:Ignorable="d"
-        Title="AddProductView" Height="400" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
+        Title="AddProductView" Height="420" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
     <Grid Background="#FF191919">
         <StackPanel Margin="0 40 0 0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -22,19 +22,19 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <StackPanel Margin="0 0 0 0" Orientation="Vertical" HorizontalAlignment="Center">
-                    <TextBox x:Name="Name" Text="{Binding Name}" Margin="0 5" materialDesign:HintAssist.Hint="Enter Name" Foreground="White" Width="200" BorderBrush="Black" CaretBrush="#FF7231E5" SelectionBrush="#FF7230E6" />
-                    <TextBox x:Name="Price" Text="{Binding Price, TargetNullValue=''}" Margin="0 5" materialDesign:HintAssist.Hint="Enter Price" Foreground="White" Width="200" BorderBrush="Black" CaretBrush="#FF7231E5" SelectionBrush="#FF7230E6" />
-                    <TextBox x:Name="Quantity" Text="{Binding Quantity, TargetNullValue=''}" Margin="0 5" materialDesign:HintAssist.Hint="Enter Amount" Foreground="White" Width="200" BorderBrush="Black" CaretBrush="#FF7231E5" SelectionBrush="#FF7230E6" />
+                    <TextBox x:Name="Name" Text="{Binding Name}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 5" materialDesign:HintAssist.Hint="Enter Name" Foreground="White" Width="200" BorderBrush="Black" CaretBrush="#FF7231E5" SelectionBrush="#FF7230E6" />
+                    <TextBox x:Name="Price" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding Price, TargetNullValue=''}" Margin="0 5" materialDesign:HintAssist.Hint="Enter Price" Foreground="White" Width="200" BorderBrush="Black" CaretBrush="#FF7231E5" SelectionBrush="#FF7230E6" />
+                    <TextBox x:Name="Quantity" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding Quantity, TargetNullValue=''}" Margin="0 5" materialDesign:HintAssist.Hint="Enter Amount" Foreground="White" Width="200" BorderBrush="Black" CaretBrush="#FF7231E5" SelectionBrush="#FF7230E6" />
                 </StackPanel>
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                    <ComboBox Margin="20" x:Name="cbCompanies" ItemsSource="{Binding Companies}" SelectedItem="{Binding SelectedCompany}" DisplayMemberPath="Name" Width="200" materialDesign:HintAssist.Hint="Select Company" Foreground="White">
+                    <ComboBox Margin="20" x:Name="cbCompanies" Style="{StaticResource MaterialDesignFloatingHintComboBox}" ItemsSource="{Binding Companies}" SelectedItem="{Binding SelectedCompany}" DisplayMemberPath="Name" Width="200" materialDesign:HintAssist.Hint="Select Company" Foreground="White">
                         <ComboBox.ItemContainerStyle>
                             <Style TargetType="{x:Type ComboBoxItem}" BasedOn="{StaticResource MaterialDesignComboBoxItemStyle}">
                                 <Setter Property="Foreground" Value="#FF191919"></Setter>
                             </Style>
                         </ComboBox.ItemContainerStyle>
                     </ComboBox>
-                    <ComboBox x:Name="cbCategories" ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}" DisplayMemberPath="Name" Width="200" materialDesign:HintAssist.Hint="Select Category" Foreground="White">
+                    <ComboBox x:Name="cbCategories" Style="{StaticResource MaterialDesignFloatingHintComboBox}" ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}" DisplayMemberPath="Name" Width="200" materialDesign:HintAssist.Hint="Select Category" Foreground="White">
                         <ComboBox.ItemContainerStyle>
                             <Style TargetType="{x:Type ComboBoxItem}" BasedOn="{StaticResource MaterialDesignComboBoxItemStyle}">
                                 <Setter Property="Foreground" Value="#FF191919"></Setter>

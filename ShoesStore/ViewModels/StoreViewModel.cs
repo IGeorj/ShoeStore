@@ -118,6 +118,7 @@ namespace ShoesStore.ViewModels
             TypeFilter();
             CategoryFilter();
             //SearchFilter();
+            //SortFilter();
         }
 
         public void TypeFilter()

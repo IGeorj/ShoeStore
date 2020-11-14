@@ -28,7 +28,19 @@ namespace ShoesStore.ViewModels
             }
         }
 
-        public ICommand ChangeProfCommand { get; set; }
+        private RelayCommand _changeUserCommand;
+
+        public RelayCommand ChangeUserCommand
+        {
+            get
+            {
+                return _changeUserCommand ??
+                  (_changeUserCommand = new RelayCommand(obj =>
+                  {
+                      ChangeUser();
+                  }));
+            }
+        }
 
         private User _selectedUser;
         public User SelectedUser
@@ -60,24 +72,24 @@ namespace ShoesStore.ViewModels
             {
                 _searchedText = value;
                 OnPropertyChanged();
-                SearchUser(_searchedText);
+                SearchUser();
             }
         }
 
-        public void SearchUser(string text)
+        public void SearchUser()
         {
             //TODO CollectionView
             using (ApplicationContext db = new ApplicationContext())
             {
-                if (text == "")
+                if (_searchedText == "")
                 {
                     LoadDataAsync();
                 }
                 else
                 {
                     Users = new ObservableCollection<User>(
-                        db.Users.Where(x => x.Name.StartsWith(text) || x.Email.StartsWith(text) || x.Login.StartsWith(text) ||
-                        x.Password.StartsWith(text) || x.Proffesion.StartsWith(text))
+                        db.Users.Where(x => x.Name.StartsWith(_searchedText) || x.Email.StartsWith(_searchedText) || x.Login.StartsWith(_searchedText) ||
+                        x.Password.StartsWith(_searchedText) || x.Proffesion.StartsWith(_searchedText))
                         );
                 }
             }
@@ -89,29 +101,19 @@ namespace ShoesStore.ViewModels
                 db.Users.Remove(SelectedUser);
                 db.SaveChanges();
                 Users.Remove(SelectedUser);
-                SearchUser(_searchedText);
+                SearchUser();
             }
         }
-        public void ChangeProf()
+        public void ChangeUser()
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                User us = db.Users.FirstOrDefault(x => x == SelectedUser);
-                if(us.Proffesion == "Admin")
-                {
-                    us.Proffesion = "Seller";
-                }
-                else
-                {
-                    us.Proffesion = "Admin";
-                }
                 db.SaveChanges();
             }
-            SearchUser(_searchedText);
+            SearchUser();
         }
         public UsersViewModel()
         {
-            ChangeProfCommand = new ChangeProfCommand(this);
             LoadDataAsync();
         }
 

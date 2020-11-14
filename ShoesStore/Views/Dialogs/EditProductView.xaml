@@ -6,35 +6,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ShoesStore.Views.Dialogs"
         mc:Ignorable="d"
-        Title="EditProductView" Height="400" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
+        Title="EditProductView" Height="420" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
     <Grid Background="#FF191919">
         <StackPanel Margin="0 40 0 0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Border Width="100" Height="100" CornerRadius="5" Margin="5" BorderBrush="#FF7A00C0" BorderThickness="1">
+                <Border Width="100" Height="100" CornerRadius="5" Margin="5" BorderThickness="1">
+                    <Border.BorderBrush>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF6200EE" Offset="0" />
+                            <GradientStop Color="#FF22C68C" Offset="0.791" />
+                        </LinearGradientBrush>
+                    </Border.BorderBrush>
                     <Border.Effect>
                         <DropShadowEffect ShadowDepth="1" />
                     </Border.Effect>
                     <Image x:Name="borderImage" Source="{Binding Image}" Stretch="Fill" Width="100" Height="100" />
                 </Border>
-                <Button Background="#FF22C68C" BorderBrush="#FF1FCC88" Margin="20 0 0 0" Height="30" Width="30" Padding="0" Command="{Binding ChangeImageCommand}">
+                <Button Background="#6200EE" BorderBrush="#6200EE" Margin="20 0 0 0" Height="30" Width="30" Padding="0" Command="{Binding ChangeImageCommand}">
                     <materialDesign:PackIcon Kind="PhotoLibrary" />
                 </Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <StackPanel Margin="0 0 0 0" Orientation="Vertical" HorizontalAlignment="Center">
-                    <TextBox x:Name="Name" Text="{Binding Name}" Margin="0 5" materialDesign:HintAssist.Hint="Enter Name" Foreground="White" Width="200" BorderBrush="Black" CaretBrush="#FF7231E5" SelectionBrush="#FF7230E6" />
-                    <TextBox x:Name="Price" Text="{Binding Price, TargetNullValue=''}" Margin="0 5" materialDesign:HintAssist.Hint="Enter Price" Foreground="White" Width="200" BorderBrush="Black" CaretBrush="#FF7231E5" SelectionBrush="#FF7230E6" />
-                    <TextBox x:Name="Quantity" Text="{Binding Quantity, TargetNullValue=''}" Margin="0 5" materialDesign:HintAssist.Hint="Enter Amount" Foreground="White" Width="200" BorderBrush="Black" CaretBrush="#FF7231E5" SelectionBrush="#FF7230E6" />
+                    <TextBox materialDesign:TextFieldAssist.UnderlineBrush="#FF22C68C" x:Name="Name" Text="{Binding Name}" Margin="0 5" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Enter Name" Foreground="White" Width="200" BorderBrush="Black" CaretBrush="#FF7231E5" SelectionBrush="#FF7230E6" />
+                    <TextBox materialDesign:TextFieldAssist.UnderlineBrush="#FF22C68C" x:Name="Price" Text="{Binding Price, TargetNullValue=''}" Margin="0 5" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Enter Price" Foreground="White" Width="200" BorderBrush="Black" CaretBrush="#FF7231E5" SelectionBrush="#FF7230E6" />
+                    <TextBox materialDesign:TextFieldAssist.UnderlineBrush="#FF22C68C" x:Name="Quantity" Text="{Binding Quantity, TargetNullValue=''}" Margin="0 5" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Enter Amount" Foreground="White" Width="200" BorderBrush="Black" CaretBrush="#FF7231E5" SelectionBrush="#FF7230E6" />
                 </StackPanel>
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                    <ComboBox Margin="20" x:Name="cbCompanies" ItemsSource="{Binding Companies}" SelectedItem="{Binding SelectedCompany, Mode=TwoWay}" DisplayMemberPath="Name" Width="200" materialDesign:HintAssist.Hint="Select Company" Foreground="White">
+                    <ComboBox Margin="20" x:Name="cbCompanies" materialDesign:TextFieldAssist.UnderlineBrush="#FF22C68C" Style="{StaticResource MaterialDesignFloatingHintComboBox}" ItemsSource="{Binding Companies}" SelectedItem="{Binding SelectedCompany, Mode=TwoWay}" DisplayMemberPath="Name" Width="200" materialDesign:HintAssist.Hint="Select Company" Foreground="White">
                         <ComboBox.ItemContainerStyle>
                             <Style TargetType="{x:Type ComboBoxItem}" BasedOn="{StaticResource MaterialDesignComboBoxItemStyle}">
                                 <Setter Property="Foreground" Value="#FF191919"></Setter>
                             </Style>
                         </ComboBox.ItemContainerStyle>
                     </ComboBox>
-                    <ComboBox x:Name="cbCategories" ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}"  DisplayMemberPath="Name" Width="200" materialDesign:HintAssist.Hint="Select Category" Foreground="White">
+                    <ComboBox x:Name="cbCategories" materialDesign:TextFieldAssist.UnderlineBrush="#FF22C68C" Style="{StaticResource MaterialDesignFloatingHintComboBox}" ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}"  DisplayMemberPath="Name" Width="200" materialDesign:HintAssist.Hint="Select Category" Foreground="White">
                         <ComboBox.ItemContainerStyle>
                             <Style TargetType="{x:Type ComboBoxItem}" BasedOn="{StaticResource MaterialDesignComboBoxItemStyle}">
                                 <Setter Property="Foreground" Value="#FF191919"></Setter>

@@ -43,6 +43,14 @@ namespace ShoesStore
                     cmd.Execute("Store");
                     break;
 
+                case 2:
+                    cmd.Execute("Companies");
+                    break;
+
+                case 3:
+                    cmd.Execute("Categories");
+                    break;
+
                 case 4:
                     cmd.Execute("Orders");
                     break;
