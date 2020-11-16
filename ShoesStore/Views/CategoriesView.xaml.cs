@@ -20,7 +20,7 @@ namespace ShoesStore.Views
             AddCategoryView addProductView = new AddCategoryView();
             if (addProductView.ShowDialog() == true)
             {
-                viewModel.LoadData();
+                viewModel.LoadDataAsync();
             }
         }
 
@@ -30,7 +30,7 @@ namespace ShoesStore.Views
             editview.DataContext = new AddEditCategoryViewModel(viewModel.SelectedCategory.Id);
             if (editview.ShowDialog() == true)
             {
-                viewModel.LoadData();
+                viewModel.LoadDataAsync();
             }
         }
     }

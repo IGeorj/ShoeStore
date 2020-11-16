@@ -20,7 +20,7 @@ namespace ShoesStore.Views
             AddCompanyView addProductView = new AddCompanyView();
             if (addProductView.ShowDialog() == true)
             {
-                viewModel.LoadData();
+                viewModel.LoadDataAsync();
             }
         }
 
@@ -30,7 +30,7 @@ namespace ShoesStore.Views
             editview.DataContext = new AddEditCompanyViewModel(viewModel.SelectedCompany.Id);
             if (editview.ShowDialog() == true)
             {
-                viewModel.LoadData();
+                viewModel.LoadDataAsync();
             }
         }
     }

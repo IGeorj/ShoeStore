@@ -1,18 +1,17 @@
-﻿using ShoesStore.Commands;
+﻿using Microsoft.EntityFrameworkCore;
+using ShoesStore.Commands;
 using ShoesStore.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace ShoesStore.ViewModels
 {
     public class CategoriesViewModel : BaseViewModel
     {
         private Category _selectedCategory;
-        public Category SelectedCategory 
-        { 
+
+        public Category SelectedCategory
+        {
             get => _selectedCategory;
             set
             {
@@ -32,6 +31,7 @@ namespace ShoesStore.ViewModels
                 OnPropertyChanged();
             }
         }
+
         private RelayCommand _deleteCategoryCommand;
 
         public RelayCommand DeleteCategoryCommand
@@ -45,23 +45,28 @@ namespace ShoesStore.ViewModels
                   }));
             }
         }
+
         public void DeleteCategory()
         {
-            using(ApplicationContext db = new ApplicationContext())
+            using (ApplicationContext db = new ApplicationContext())
             {
                 db.Categories.Remove(SelectedCategory);
                 db.SaveChanges();
             }
+            LoadDataAsync();
         }
+
         public CategoriesViewModel()
         {
-            LoadData();
+            LoadDataAsync();
         }
-        public void LoadData()
+
+        public async Task LoadDataAsync()
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                Categories = new ObservableCollection<Category>(db.Categories.ToList());
+                var categories = await Task.Run(() => db.Categories.ToListAsync());
+                Categories = new ObservableCollection<Category>(categories);
             }
         }
     }

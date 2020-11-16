@@ -3,6 +3,7 @@ using ShoesStore.Commands;
 using ShoesStore.Models;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ShoesStore.ViewModels
 {
@@ -151,16 +152,18 @@ namespace ShoesStore.ViewModels
 
         public StoreViewModel()
         {
-            LoadData();
+            LoadDataAsync();
         }
 
-        public void LoadData()
+        public async Task LoadDataAsync()
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                Products = new ObservableCollection<Product>(db.Products.Include("Company").Include("Category").ToList());
+                var products = await Task.Run(() => db.Products.Include("Company").Include("Category").ToListAsync());
+                Products = new ObservableCollection<Product>(products);
                 _originalProduct = new ObservableCollection<Product>(Products);
-                Categories = new ObservableCollection<Category>(db.Categories.ToList());
+                var categories = await Task.Run(() => db.Categories.ToListAsync());
+                Categories = new ObservableCollection<Category>(categories);
             }
         }
 

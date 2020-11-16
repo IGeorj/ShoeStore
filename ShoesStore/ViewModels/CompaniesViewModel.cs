@@ -1,7 +1,8 @@
-﻿using ShoesStore.Commands;
+﻿using Microsoft.EntityFrameworkCore;
+using ShoesStore.Commands;
 using ShoesStore.Models;
 using System.Collections.ObjectModel;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace ShoesStore.ViewModels
 {
@@ -30,6 +31,7 @@ namespace ShoesStore.ViewModels
                 OnPropertyChanged();
             }
         }
+
         private RelayCommand _deleteCompanyCommand;
 
         public RelayCommand DeleteCompanyCommand
@@ -43,6 +45,7 @@ namespace ShoesStore.ViewModels
                   }));
             }
         }
+
         public void DeleteCompany()
         {
             using (ApplicationContext db = new ApplicationContext())
@@ -50,17 +53,20 @@ namespace ShoesStore.ViewModels
                 db.Companies.Remove(SelectedCompany);
                 db.SaveChanges();
             }
-        }
-        public CompaniesViewModel()
-        {
-            LoadData();
+            LoadDataAsync();
         }
 
-        public void LoadData()
+        public CompaniesViewModel()
+        {
+            LoadDataAsync();
+        }
+
+        public async Task LoadDataAsync()
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                Companies = new ObservableCollection<Company>(db.Companies.ToList());
+                var companies = await Task.Run(() => db.Companies.ToListAsync());
+                Companies = new ObservableCollection<Company>(companies);
             }
         }
     }
