@@ -1,26 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ShoesStore.ViewModels;
+using ShoesStore.Views.Dialogs;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ShoesStore.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для CategoriesView.xaml
-    /// </summary>
     public partial class CategoriesView : UserControl
     {
+        private CategoriesViewModel viewModel = new CategoriesViewModel();
+
         public CategoriesView()
         {
             InitializeComponent();
+            DataContext = viewModel;
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            AddCategoryView addProductView = new AddCategoryView();
+            if (addProductView.ShowDialog() == true)
+            {
+                viewModel.LoadData();
+            }
+        }
+
+        private void ChangeButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            EditCategoryView editview = new EditCategoryView();
+            editview.DataContext = new AddEditCategoryViewModel(viewModel.SelectedCategory.Id);
+            if (editview.ShowDialog() == true)
+            {
+                viewModel.LoadData();
+            }
         }
     }
 }

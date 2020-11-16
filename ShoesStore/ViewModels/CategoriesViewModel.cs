@@ -1,4 +1,5 @@
-﻿using ShoesStore.Models;
+﻿using ShoesStore.Commands;
+using ShoesStore.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,6 +10,17 @@ namespace ShoesStore.ViewModels
 {
     public class CategoriesViewModel : BaseViewModel
     {
+        private Category _selectedCategory;
+        public Category SelectedCategory 
+        { 
+            get => _selectedCategory;
+            set
+            {
+                _selectedCategory = value;
+                OnPropertyChanged();
+            }
+        }
+
         private ObservableCollection<Category> _categories;
 
         public ObservableCollection<Category> Categories
@@ -18,6 +30,27 @@ namespace ShoesStore.ViewModels
             {
                 _categories = value;
                 OnPropertyChanged();
+            }
+        }
+        private RelayCommand _deleteCategoryCommand;
+
+        public RelayCommand DeleteCategoryCommand
+        {
+            get
+            {
+                return _deleteCategoryCommand ??
+                  (_deleteCategoryCommand = new RelayCommand(obj =>
+                  {
+                      DeleteCategory();
+                  }));
+            }
+        }
+        public void DeleteCategory()
+        {
+            using(ApplicationContext db = new ApplicationContext())
+            {
+                db.Categories.Remove(SelectedCategory);
+                db.SaveChanges();
             }
         }
         public CategoriesViewModel()

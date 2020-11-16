@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:ShoesStore.Views.Dialogs"
+        xmlns:convert="clr-namespace:ShoesStore.Converters"
+        xmlns:enums="clr-namespace:ShoesStore.Enums"
         mc:Ignorable="d"
         Title="AddProductView" Height="420" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
     <Grid Background="#FF191919">
@@ -44,8 +46,11 @@
                 </StackPanel>
             </StackPanel>
             <StackPanel Margin="0 20 0 0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <RadioButton Margin="0 0 10 0" Content="Male" IsChecked="{Binding IsMale}" Foreground="White" FontSize="12" Background="#FF7A00C0" BorderBrush="#FF7A00C0" />
-                <RadioButton Content="Female" IsChecked="{Binding IsFemale}" Foreground="White" FontSize="12" Background="#FF7A00C0" BorderBrush="#FF7A00C0" />
+                <StackPanel.Resources>
+                    <convert:ComparisonConverter x:Key="ComparisonConverter" />
+                </StackPanel.Resources>
+                <RadioButton IsChecked="{Binding Path=Sex, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static enums:SexType.Male}}" Margin="0 0 10 0" Content="Male" Foreground="White" FontSize="12" Background="#FF7A00C0" BorderBrush="#FF7A00C0" />
+                <RadioButton IsChecked="{Binding Path=Sex, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static enums:SexType.Female}}" Content="Female" Foreground="White" FontSize="12" Background="#FF7A00C0" BorderBrush="#FF7A00C0" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button x:Name="Confirm" Click="Confirm_Click" Margin="0 20 30 0" Width="100" Background="#FF22C68C" BorderBrush="#FF1FCC88" Command="{Binding AddProductCommand}">Confirm</Button>

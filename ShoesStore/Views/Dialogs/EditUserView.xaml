@@ -5,6 +5,8 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ShoesStore.Views.Dialogs"
+        xmlns:convert="clr-namespace:ShoesStore.Converters"
+        xmlns:enums="clr-namespace:ShoesStore.Enums"
         mc:Ignorable="d"
         Title="EditUserView" Height="400" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
     <Grid Background="#FF191919">
@@ -18,8 +20,11 @@
                 </StackPanel>
             </StackPanel>
             <StackPanel Margin="0 20 0 0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <RadioButton Margin="0 0 10 0" Content="Admin" IsChecked="{Binding IsAdmin}" Foreground="White" FontSize="12" Background="#FF7A00C0" BorderBrush="#FF7A00C0" />
-                <RadioButton Content="Seller" IsChecked="{Binding IsSeller}" Foreground="White" FontSize="12" Background="#FF7A00C0" BorderBrush="#FF7A00C0" />
+                <StackPanel.Resources>
+                    <convert:ComparisonConverter x:Key="ComparisonConverter" />
+                </StackPanel.Resources>
+                <RadioButton IsChecked="{Binding Path=AccType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static enums:AccountType.Admin}}"  Margin="0 0 10 0" Content="Admin" Foreground="White" FontSize="12" Background="#FF7A00C0" BorderBrush="#FF7A00C0" />
+                <RadioButton IsChecked="{Binding Path=AccType, Converter={StaticResource ComparisonConverter}, ConverterParameter={x:Static enums:AccountType.Seller}}" Content="Seller" Foreground="White" FontSize="12" Background="#FF7A00C0" BorderBrush="#FF7A00C0" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button x:Name="Confirm" Click="Confirm_Click" Margin="0 20 30 0" Width="100" Background="#FF22C68C" BorderBrush="#FF1FCC88" Command="{Binding ChangeUserCommand}">Confirm</Button>

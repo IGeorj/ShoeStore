@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
 using ShoesStore.Commands;
+using ShoesStore.Enums;
 using ShoesStore.Models;
 using System;
 using System.Collections.ObjectModel;
@@ -35,18 +36,6 @@ namespace ShoesStore.ViewModels
                 OnPropertyChanged("IsFemale");
                 OnPropertyChanged("IsMale");
             }
-        }
-
-        public bool IsMale
-        {
-            get { return Sex == SexType.Male; }
-            set { Sex = value ? SexType.Male : Sex; }
-        }
-
-        public bool IsFemale
-        {
-            get { return Sex == SexType.Female; }
-            set { Sex = value ? SexType.Female : Sex; }
         }
 
         public string GetSexType

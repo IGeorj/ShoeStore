@@ -1,15 +1,10 @@
 ﻿using ShoesStore.Commands;
+using ShoesStore.Enums;
 using ShoesStore.Models;
 using System.Windows;
 
 namespace ShoesStore.ViewModels
 {
-    public enum AccountType
-    {
-        Admin,
-        Seller
-    }
-
     public class EditUserViewModel : BaseViewModel
     {
         private int _id;
@@ -35,18 +30,6 @@ namespace ShoesStore.ViewModels
                 OnPropertyChanged("IsSeller");
                 OnPropertyChanged("IsAdmin");
             }
-        }
-
-        public bool IsAdmin
-        {
-            get { return AccType == AccountType.Admin; }
-            set { AccType = value ? AccountType.Admin : AccType; }
-        }
-
-        public bool IsSeller
-        {
-            get { return AccType == AccountType.Seller; }
-            set { AccType = value ? AccountType.Seller : AccType; }
         }
 
         public string GetAccType

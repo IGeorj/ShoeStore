@@ -29,7 +29,7 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Background="#FF22C68C" Foreground="White" x:Name="ChangeButton" Click="ChangeButton_Click" Height="25" Width="70" FontSize="10" Padding="0" Command="{Binding DataContext.ChangeProfCommand, RelativeSource={ RelativeSource AncestorType={x:Type DataGrid} } }" BorderBrush="#FF1FCC88">Change</Button>
+                            <Button Background="#FF22C68C" Foreground="White" x:Name="ChangeButton" Click="ChangeButton_Click" Height="25" Width="70" FontSize="10" Padding="0" BorderBrush="#FF1FCC88">Change</Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

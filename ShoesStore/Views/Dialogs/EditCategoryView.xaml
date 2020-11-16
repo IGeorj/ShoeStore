@@ -1,0 +1,21 @@
+﻿<Window x:Class="ShoesStore.Views.Dialogs.EditCategoryView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:ShoesStore.Views.Dialogs"
+        mc:Ignorable="d"
+       Title="EditCategoryView" Height="140" Width="340" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
+    <Grid Background="#FF191919">
+        <StackPanel Orientation="Vertical" Margin="0 10 0 0" HorizontalAlignment="Center">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                <TextBox x:Name="Name" Text="{Binding Name}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0 5" materialDesign:HintAssist.Hint="Enter Name" Foreground="White" Width="200" BorderBrush="Black" CaretBrush="#FF7231E5" SelectionBrush="#FF7230E6" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="Confirm" Click="Confirm_Click" Margin="0 20 30 0" Width="100" Background="#FF22C68C" BorderBrush="#FF1FCC88" Command="{Binding ChangeCategoryCommand}">Confirm</Button>
+                <Button IsCancel="True" x:Name="Close" Margin="0 20 0 0" Width="100" Background="#FF22C68C" BorderBrush="#FF1FCC88">Cancel</Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

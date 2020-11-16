@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ShoesStore"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        mc:Ignorable="d" Height="600" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
+        mc:Ignorable="d" Height="640" Width="1024" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None">
     <Grid Background="#FFEEEEEE" MouseDown="Grid_MouseDown">
         <StackPanel VerticalAlignment="Top">
             <Grid Background="#FF7A00C0" Height="10" />
@@ -41,17 +41,17 @@
 
         <Grid Width="250" HorizontalAlignment="Left" Background="#FF191919">
             <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide" OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.2}">
-                <Grid x:Name="GridCursor" Margin="0 100 0 0" Background="#FF7A00C0" Width="10" HorizontalAlignment="Left" Height="60" VerticalAlignment="Top" />
+                <Grid x:Name="GridCursor" Margin="0 150 0 0" Background="#FF7A00C0" Width="10" HorizontalAlignment="Left" Height="60" VerticalAlignment="Top" />
             </materialDesign:TransitioningContent>
-            <materialDesign:PackIcon Kind="ShoeSneaker" Width="80" Height="80" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5">
+            <materialDesign:PackIcon Kind="ShoeSneaker" Width="100" Height="100" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 25 0 0">
                 <materialDesign:PackIcon.Foreground>
                     <LinearGradientBrush EndPoint="0,1" StartPoint="2,0">
-                        <GradientStop Color="#FF30185B" Offset="0.9" />
-                        <GradientStop Color="#FF1FCC88" Offset="0.345" />
+                        <GradientStop Color="#FF7A00C0" Offset="0.85" />
+                        <GradientStop Color="#FF1FCC88" Offset="0.4" />
                     </LinearGradientBrush>
                 </materialDesign:PackIcon.Foreground>
             </materialDesign:PackIcon>
-            <ListView x:Name="ListViewMenu" Margin="0 100" Foreground="LightGray" FontFamily="Champagne &amp; Limousines" FontSize="18" SelectionChanged="ListViewMenu_SelectionChanged" SelectedIndex="0">
+            <ListView x:Name="ListViewMenu" Margin="0 150 0 0" Foreground="LightGray" FontFamily="Champagne &amp; Limousines" FontSize="18" SelectionChanged="ListViewMenu_SelectionChanged" SelectedIndex="0">
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Home" Width="30" Height="30" VerticalAlignment="Center" Margin="5" />

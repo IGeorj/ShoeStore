@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using ShoesStore.Commands;
+using ShoesStore.Enums;
 using ShoesStore.Models;
 using System;
 using System.Collections.ObjectModel;
@@ -9,11 +10,6 @@ using System.Windows.Media.Imaging;
 
 namespace ShoesStore.ViewModels
 {
-    public enum SexType
-    {
-        Male,
-        Female
-    }
 
     public class AddProductViewModel : BaseViewModel
     {
@@ -32,18 +28,6 @@ namespace ShoesStore.ViewModels
                 OnPropertyChanged("IsFemale");
                 OnPropertyChanged("IsMale");
             }
-        }
-
-        public bool IsMale
-        {
-            get { return Sex == SexType.Male; }
-            set { Sex = value ? SexType.Male : Sex; }
-        }
-
-        public bool IsFemale
-        {
-            get { return Sex == SexType.Female; }
-            set { Sex = value ? SexType.Female : Sex; }
         }
 
         public string GetSexType
