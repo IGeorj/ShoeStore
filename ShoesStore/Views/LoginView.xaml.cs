@@ -2,6 +2,7 @@
 using ShoesStore.Models;
 using ShoesStore.ViewModels;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,39 +17,48 @@ namespace ShoesStore.Views
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                ////DB Initialization
-                //db.Users.Add(new User { Login = "admin", Email = "admin", Password = "admin", Name = "admin", Proffesion = "Admin" });
-                //db.Users.Add(new User { Login = "log2", Email = "em2", Password = "pass2", Name = "name2", Proffesion = "Seller" });
-                //db.Users.Add(new User { Login = "log3", Email = "em3", Password = "pass3", Name = "name3", Proffesion = "Seller" });
-                //db.Users.Add(new User { Login = "log4", Email = "em4", Password = "pass4", Name = "name4", Proffesion = "Seller" });
-                //db.Users.Add(new User { Login = "qqq", Email = "qqq", Password = "qqq", Name = "qqq", Proffesion = "Admin" });
+                //User user1 = new User { Login = "admin", Email = "admin", Password = "admin", Name = "admin", Proffesion = "Admin" };
+                //User user2 = new User { Login = "qwe", Email = "qwe", Password = "qwe", Name = "qwe", Proffesion = "Seller" };
+                //db.Users.Add(user1);
+                //db.Users.Add(user2);
+                //Company company1 = new Company { Name = "Addidas" };
+                //Company company2 = new Company { Name = "Nike" };
+                //Company company3 = new Company { Name = "Patrol" };
+                //Company company4 = new Company { Name = "Vans" };
+                //db.Companies.Add(company1);
+                //db.Companies.Add(company2);
+                //db.Companies.Add(company3);
+                //db.Companies.Add(company4);
+                //Category category1 = new Category { Name = "Sandals" };
+                //Category category2 = new Category { Name = "Sneakers" };
+                //Category category3 = new Category { Name = "Gumshoes" };
+                //Category category4 = new Category { Name = "High Heels" };
+                //db.Categories.Add(category1);
+                //db.Categories.Add(category2);
+                //db.Categories.Add(category3);
+                //db.Categories.Add(category4);
                 //db.SaveChanges();
-                //db.Companies.Add(new Company { Name = "Addidas" });
-                //db.Companies.Add(new Company { Name = "Nike" });
-                //db.Companies.Add(new Company { Name = "Patrol" });
-                //db.Companies.Add(new Company { Name = "Vans" });
+                //Product product1 = new Product { Image = $"{System.Environment.CurrentDirectory}" + @"\Images\Sandali.png", Name = "G10", Category = category1, Company = company1, Price = 100, Quantity = 10, Type = "Male" };
+                //Product product2 = new Product { Image = $"{System.Environment.CurrentDirectory}" + @"\Images\Crosi.png", Name = "G10", Category = category2, Company = company2, Price = 150, Quantity = 15, Type = "Male" };
+                //Product product3 = new Product { Image = $"{System.Environment.CurrentDirectory}" + @"\Images\Kedi.png", Name = "G10", Category = category3, Company = company3, Price = 200, Quantity = 100, Type = "Female" };
+                //Product product4 = new Product { Image = $"{System.Environment.CurrentDirectory}" + @"\Images\Tufli.png", Name = "G10", Category = category4, Company = company4, Price = 550, Quantity = 10, Type = "Female" };
+                //db.Products.Add(product1);
+                //db.Products.Add(product2);
+                //db.Products.Add(product3);
+                //db.Products.Add(product4);
                 //db.SaveChanges();
-                //db.Categories.Add(new Category { Name = "Sandals" });
-                //db.Categories.Add(new Category { Name = "Sneakers" });
-                //db.Categories.Add(new Category { Name = "Gumshoes" });
-                //db.Categories.Add(new Category { Name = "High Heels" });
+                //Order order1 = new Order { Date = "20.20.2020", User = user1, Status = "Pending", TotalPrice = 0 };
+                //db.Orders.Add(order1);
                 //db.SaveChanges();
-                //db.Products.Add(new Product { Image = $"{System.Environment.CurrentDirectory}" + @"\Images\Sandali.png", Name = "G10", Category = db.Categories.FirstOrDefault(x => x.Name == "Sandals"), Company = db.Companies.FirstOrDefault(x => x.Name == "Patrol"), Price = 80, Quantity = 10, Type = "Male" });
-                //db.Products.Add(new Product { Image = $"{System.Environment.CurrentDirectory}" + @"\Images\Crosi.png", Name = "Air Force", Category = db.Categories.FirstOrDefault(x => x.Name == "Sneakers"), Company = db.Companies.FirstOrDefault(x => x.Name == "Addidas"), Price = 120, Quantity = 20, Type = "Male" });
-                //db.Products.Add(new Product { Image = $"{System.Environment.CurrentDirectory}" + @"\Images\Kedi.png", Name = "Yeezy", Category = db.Categories.FirstOrDefault(x => x.Name == "Gumshoes"), Company = db.Companies.FirstOrDefault(x => x.Name == "Nike"), Price = 130, Quantity = 30, Type = "Female" });
-                //db.Products.Add(new Product { Image = $"{System.Environment.CurrentDirectory}" + @"\Images\Tufli.png", Name = "Lady Love", Category = db.Categories.FirstOrDefault(x => x.Name == "High Heels"), Company = db.Companies.FirstOrDefault(x => x.Name == "Vans"), Price = 50, Quantity = 40, Type = "Female" });
-                //db.SaveChanges();
-                //db.Orders.Add(new Order { Date = "20.20.2020", User = db.Users.First(), TotalPrice = 0 }); ;
-                //db.SaveChanges();
-                //db.OrderDetails.Add(new OrderDetail { Order = db.Orders.First(), Product = db.Products.FirstOrDefault(x => x.Category.Name == "Sandals"), Quantity = 1 });
-                //db.OrderDetails.Add(new OrderDetail { Order = db.Orders.First(), Product = db.Products.FirstOrDefault(x => x.Category.Name == "Sneakers"), Quantity = 5 });
-                //db.OrderDetails.Add(new OrderDetail { Order = db.Orders.First(), Product = db.Products.FirstOrDefault(x => x.Category.Name == "Gumshoes"), Quantity = 5 });
-                //db.SaveChanges();
-                //Order order = db.Orders.First();
-                //var result = db.OrderDetails.Where(x => x.Order.Id == order.Id);
+                //OrderDetail orderDetail1 = new OrderDetail { Order = order1, Product = product1, Quantity = 10, TotalPrice = 10 * product1.Price };
+                //OrderDetail orderDetail2 = new OrderDetail { Order = order1, Product = product2, Quantity = 5, TotalPrice = 5 * product2.Price };
+                //db.OrderDetails.Add(orderDetail1);
+                //db.OrderDetails.Add(orderDetail2);
+                //Order ordertotal = db.Orders.First();
+                //var result = db.OrderDetails.Where(x => x.Order.Id == ordertotal.Id);
                 //foreach (var item in result)
                 //{
-                //    order.TotalPrice += item.Quantity * item.Product.Price;
+                //    ordertotal.TotalPrice += item.TotalPrice;
                 //}
                 //db.SaveChanges();
             }

@@ -4,6 +4,7 @@ using ShoesStore.Models;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ShoesStore.ViewModels
 {
@@ -87,7 +88,19 @@ namespace ShoesStore.ViewModels
                   }));
             }
         }
+        private RelayCommand _buyProductCommand;
 
+        public RelayCommand BuyProductCommand
+        {
+            get
+            {
+                return _buyProductCommand ??
+                  (_buyProductCommand = new RelayCommand(obj =>
+                  {
+                      BuyProduct();
+                  }));
+            }
+        }
         private RelayCommand _filterCommand;
 
         public RelayCommand FilterCommand
@@ -112,7 +125,34 @@ namespace ShoesStore.ViewModels
                 Products.Remove(SelectedProduct);
             }
         }
-
+        public void BuyProduct()
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                Product product = db.Products.Find(SelectedProduct.Id);
+                if(product.Quantity == 0)
+                {
+                    MessageBox.Show("Out of stock");
+                    return;
+                }
+                else
+                {
+                    product.Quantity -= 1;
+                    OrderDetail details = db.OrderDetails.Where(x => x.Order.Status == "Pending").FirstOrDefault(x => x.Product.Id == product.Id);
+                    if (details == null)
+                    {
+                        db.OrderDetails.Add(new OrderDetail { Product = product, Order = db.Orders.FirstOrDefault(x => x.Status == "Pending"), Quantity = 1, TotalPrice = product.Price });
+                    }
+                    else
+                    {
+                        details.Quantity += 1;
+                        details.TotalPrice += product.Price;
+                    }
+                }
+                db.SaveChanges();
+                Refresh();
+            }
+        }
         public void Filter()
         {
             //TODO

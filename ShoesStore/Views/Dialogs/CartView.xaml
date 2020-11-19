@@ -1,0 +1,83 @@
+﻿<Window x:Class="ShoesStore.Views.Dialogs.CartView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:ShoesStore.Views.Dialogs"
+        mc:Ignorable="d"
+        Title="CartView" Height="450" Width="800" WindowStyle="None" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="0" ItemsSource="{Binding Cart}" SelectedItem="{Binding SelectedDetails}" LayoutUpdated="DG_LayoutUpdated" SelectionMode="Single" Background="#FFFFFF" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False" x:Name="CartGrid">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Product.Image}"></Image>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Binding="{Binding Product.Name}" Header="Name" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Quantity}" Header="Quantity" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding TotalPrice, StringFormat={}{0:C}}" Header="Price" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Foreground="White" x:Name="RemoveButton" Height="25" Width="70" FontSize="10" Padding="0" Command="{Binding DataContext.RemoveProductCommand, RelativeSource={ RelativeSource AncestorType={x:Type DataGrid} } }" BorderBrush="#FFEA1818" Background="#FFEA1818">Remove</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                </Style>
+            </DataGrid.CellStyle>
+        </DataGrid>
+        <StackPanel Margin="0 10 0 0" Orientation="Horizontal" Grid.Row="1" Background="GhostWhite">
+            <TextBlock x:Name="lblTotal" TextAlignment="Right" FontWeight="Bold"  Text="Total price:"></TextBlock>
+            <TextBlock x:Name="lblTotalSalesInvoiceAmount" Text="{Binding OrderTotalPrice, StringFormat={}{0:C}}" TextAlignment="Left" FontWeight="Bold" Padding="18 0 0 0"></TextBlock>
+        </StackPanel>
+        <Button IsCancel="True" x:Name="Close" VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="Gray" Background="{x:Null}" BorderBrush="{x:Null}">
+            <materialDesign:PackIcon Kind="Close" />
+        </Button>
+        <Button VerticalAlignment="Bottom" Margin="650 0 10 10" Name="btnAdd" Grid.Row="1" Background="#FF7A00C0" BorderBrush="#FF7A00C0">
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="Check" VerticalAlignment="Center" />
+                <TextBlock Text="Accept" FontSize="13" Margin="5 0 0 0" VerticalAlignment="Center" />
+            </StackPanel>
+        </Button>
+    </Grid>
+</Window>

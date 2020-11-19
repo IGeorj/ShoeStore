@@ -2,6 +2,7 @@
 using ShoesStore.Models;
 using ShoesStore.ViewModels;
 using ShoesStore.Views;
+using ShoesStore.Views.Dialogs;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -11,7 +12,6 @@ namespace ShoesStore
     public partial class MainWindow : Window
     {
         private MainWindowModel viemodel = new MainWindowModel();
-
         public MainWindow()
         {
             InitializeComponent();
@@ -75,6 +75,12 @@ namespace ShoesStore
             SignInView login = new SignInView();
             login.Show();
             this.Close();
+        }
+
+        private void btnCart_Click(object sender, RoutedEventArgs e)
+        {
+            CartView cartView = new CartView();
+            cartView.ShowDialog();
         }
     }
 }

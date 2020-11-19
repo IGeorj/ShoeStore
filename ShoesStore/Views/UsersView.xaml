@@ -8,18 +8,14 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-        </Grid.RowDefinitions>
-        <StackPanel HorizontalAlignment="Right" Grid.Row="0" Orientation="Horizontal">
+        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal">
             <TextBox x:Name="SearchBox" materialDesign:TextFieldAssist.UnderlineBrush="#FF22C68C" Text="{Binding SearchedText, UpdateSourceTrigger=PropertyChanged}" Padding="2" FontSize="17" Margin="5" Width="200" CaretBrush="#FF22C68C"></TextBox>
             <Button x:Name='SearchButton' Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray">
                 <materialDesign:PackIcon Kind="Search" />
             </Button>
         </StackPanel>
 
-        <DataGrid Margin="5 0 0 0" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}" Grid.Row="1" Grid.Column="1" SelectionMode="Single" Background="#FFFFFF" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False" x:Name="OrdersGrid">
+        <DataGrid Margin="0 50 0 0" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedDetails}" Grid.Row="1" Grid.Column="1" SelectionMode="Single" Background="#FFFFFF" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False" x:Name="OrdersGrid">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Email}" Header="Email" />
                 <DataGridTextColumn Binding="{Binding Login}" Header="Login" />

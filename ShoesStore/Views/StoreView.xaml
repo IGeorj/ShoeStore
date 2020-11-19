@@ -8,6 +8,15 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
+            <Button Margin="0 0 0 0" Width="80" Content="Male" Background="#FF7A00C0" BorderBrush="#FF7A00C0" Command="{Binding DataContext.FilterCommand, RelativeSource={ RelativeSource AncestorType={x:Type Grid} } }" CommandParameter="Male"></Button>
+            <Button Margin="5 0 150 0" Width="80" Content="Female" Background="#FF7A00C0" BorderBrush="#FF7A00C0" Command="{Binding DataContext.FilterCommand, RelativeSource={ RelativeSource AncestorType={x:Type Grid} } }" CommandParameter="Female"></Button>
+            <ComboBox ItemsSource="{Binding Categories}" Width="150" materialDesign:TextFieldAssist.HasClearButton="True" SelectedItem="{Binding SelectedCategory}" DisplayMemberPath="Name" materialDesign:HintAssist.Hint ="Select Category"></ComboBox>
+            <TextBox x:Name="SearchBox" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:TextFieldAssist.UnderlineBrush="#FF22C68C" Text="{Binding SearchedText, UpdateSourceTrigger=PropertyChanged}" Padding="0" FontSize="15" Margin="5" Width="200" Height="28" CaretBrush="#FF22C68C"></TextBox>
+            <Button x:Name='SearchButton' Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray">
+                <materialDesign:PackIcon Kind="Search" />
+            </Button>
+        </StackPanel>
         <ScrollViewer Margin="0 45 0 0" Background="#FFF1F1F1">
             <StackPanel>
                 <StackPanel Margin="20 0">
@@ -43,7 +52,7 @@
                                         </StackPanel>
                                         <TextBlock Margin="5" Text="{Binding Price, StringFormat={}Price: {0:C}}" FontSize="17" FontWeight="Bold" />
                                         <TextBlock Margin="5 0 0 5" Text="{Binding Quantity,StringFormat='{}In stock: {0}'}" FontSize="13" />
-                                        <Button Content="Buy" Background="#FF22C68C" Foreground="White" BorderBrush="#FF1FCC88"></Button>
+                                        <Button x:Name="btnBuy" Click="btnBuy_Click" Command="{Binding DataContext.BuyProductCommand, RelativeSource={ RelativeSource AncestorType={x:Type ListBox} } }" Content="Buy" Background="#FF22C68C" Foreground="White" BorderBrush="#FF1FCC88"></Button>
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>
@@ -58,14 +67,5 @@
                 <TextBlock Text="Product" FontSize="13" VerticalAlignment="Center" />
             </StackPanel>
         </Button>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
-            <Button Margin="0 0 0 0" Width="80" Content="Male" Background="#FF7A00C0" BorderBrush="#FF7A00C0" Command="{Binding DataContext.FilterCommand, RelativeSource={ RelativeSource AncestorType={x:Type Grid} } }" CommandParameter="Male"></Button>
-            <Button Margin="5 0 150 0" Width="80" Content="Female" Background="#FF7A00C0" BorderBrush="#FF7A00C0" Command="{Binding DataContext.FilterCommand, RelativeSource={ RelativeSource AncestorType={x:Type Grid} } }" CommandParameter="Female"></Button>
-            <ComboBox ItemsSource="{Binding Categories}" Width="150" materialDesign:TextFieldAssist.HasClearButton="True" SelectedItem="{Binding SelectedCategory}" DisplayMemberPath="Name" materialDesign:HintAssist.Hint ="Select Category"></ComboBox>
-            <TextBox x:Name="SearchBox" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:TextFieldAssist.UnderlineBrush="#FF22C68C" Text="{Binding SearchedText, UpdateSourceTrigger=PropertyChanged}" Padding="0" FontSize="15" Margin="5" Width="200" Height="28" CaretBrush="#FF22C68C"></TextBox>
-            <Button x:Name='SearchButton' Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray">
-                <materialDesign:PackIcon Kind="Search" />
-            </Button>
-        </StackPanel>
     </Grid>
 </UserControl>

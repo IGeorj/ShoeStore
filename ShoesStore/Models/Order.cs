@@ -10,6 +10,7 @@ namespace ShoesStore.Models
 
         public int TotalPrice { get; set; }
         public string Date { get; set; }
+        public string Status { get; set; }
         public User User { get; set; }
         public ICollection<OrderDetail> OrderDetails { get; set; }
     }

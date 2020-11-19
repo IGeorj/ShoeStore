@@ -43,5 +43,12 @@ namespace ShoesStore.Views
                 viewModel.Refresh();
             }
         }
+
+        private void btnBuy_Click(object sender, RoutedEventArgs e)
+        {
+            ListBoxItem selectedItem = (ListBoxItem)listboxProducts.ItemContainerGenerator.
+                   ContainerFromItem(((Button)sender).DataContext);
+            selectedItem.IsSelected = true;
+        }
     }
 }
