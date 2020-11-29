@@ -182,6 +182,12 @@ namespace ShoesStore.ViewModels
                           pr.Company = db.Companies.FirstOrDefault(x => x.Id == SelectedCompany.Id);
                           pr.Category = db.Categories.FirstOrDefault(x => x.Id == SelectedCategory.Id);
                           db.SaveChanges();
+                          var orders = db.OrderDetails.Where(i => i.Product.Id == Id && i.Order.Status == "Pending");
+                          foreach (var item in orders)
+                          {
+                              item.TotalPrice = item.Quantity * item.Product.Price;
+                          }
+                          db.SaveChanges();
                       }
                   }));
             }

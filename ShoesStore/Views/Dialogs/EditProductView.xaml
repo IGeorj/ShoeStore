@@ -22,7 +22,7 @@
                     <Border.Effect>
                         <DropShadowEffect ShadowDepth="1" />
                     </Border.Effect>
-                    <Image x:Name="borderImage" Source="{Binding Image}" Stretch="Fill" Width="100" Height="100" />
+                    <Image x:Name="borderImage" Source="{Binding Image}" />
                 </Border>
                 <Button Background="#6200EE" BorderBrush="#6200EE" Margin="20 0 0 0" Height="30" Width="30" Padding="0" Command="{Binding ChangeImageCommand}">
                     <materialDesign:PackIcon Kind="PhotoLibrary" />
