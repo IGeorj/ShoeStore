@@ -69,23 +69,23 @@
                 </ListViewItem>
                 <ListViewItem Height="60">
                     <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Company" Width="30" Height="30" VerticalAlignment="Center" Margin="5" />
-                        <TextBlock Text="Company" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
-                    </StackPanel>
-                </ListViewItem>
-                <ListViewItem Height="60">
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="Category" Width="30" Height="30" VerticalAlignment="Center" Margin="5" />
-                        <TextBlock Text="Category" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
-                    </StackPanel>
-                </ListViewItem>
-                <ListViewItem Height="60">
-                    <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="Cash" Width="30" Height="30" VerticalAlignment="Center" Margin="5" />
                         <TextBlock Text="Orders" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
                     </StackPanel>
                 </ListViewItem>
-                <ListViewItem Height="60">
+                <ListViewItem Name="CompanyMenu" Height="60">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Company" Width="30" Height="30" VerticalAlignment="Center" Margin="5" />
+                        <TextBlock Text="Companies" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem Name="CategoryMenu" Height="60">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Category" Width="30" Height="30" VerticalAlignment="Center" Margin="5" />
+                        <TextBlock Text="Categories" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
+                    </StackPanel>
+                </ListViewItem>
+                <ListViewItem Name="UserMenu" Height="60">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="AccountStar" Width="30" Height="30" VerticalAlignment="Center" Margin="5" />
                         <TextBlock Text="Users" FontSize="17" VerticalAlignment="Center" Margin="20 0" />

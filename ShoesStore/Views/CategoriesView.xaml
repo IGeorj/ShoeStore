@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <StackPanel HorizontalAlignment="Right" Grid.Row="0" Orientation="Horizontal">
+        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal">
             <TextBox x:Name="SearchBox" materialDesign:TextFieldAssist.UnderlineBrush="#FF22C68C" Text="{Binding SearchedText, UpdateSourceTrigger=PropertyChanged}" Padding="2" FontSize="17" Margin="5" Width="200" CaretBrush="#FF22C68C"></TextBox>
             <Button x:Name='SearchButton' Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray">
                 <materialDesign:PackIcon Kind="Search" />

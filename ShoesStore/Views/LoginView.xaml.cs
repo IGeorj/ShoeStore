@@ -38,10 +38,10 @@ namespace ShoesStore.Views
                 //db.Categories.Add(category3);
                 //db.Categories.Add(category4);
                 //db.SaveChanges();
-                //Product product1 = new Product { Image = $"{System.Environment.CurrentDirectory}" + @"\Images\Sandali.png", Name = "G10", Category = category1, Company = company1, Price = 100, Quantity = 10, Type = "Male" };
-                //Product product2 = new Product { Image = $"{System.Environment.CurrentDirectory}" + @"\Images\Crosi.png", Name = "G10", Category = category2, Company = company2, Price = 150, Quantity = 15, Type = "Male" };
+                //Product product1 = new Product { Image = $"{System.Environment.CurrentDirectory}" + @"\Images\Sandali.png", Name = "Lampada", Category = category1, Company = company1, Price = 100, Quantity = 10, Type = "Male" };
+                //Product product2 = new Product { Image = $"{System.Environment.CurrentDirectory}" + @"\Images\Crosi.png", Name = "EZY", Category = category2, Company = company2, Price = 150, Quantity = 15, Type = "Male" };
                 //Product product3 = new Product { Image = $"{System.Environment.CurrentDirectory}" + @"\Images\Kedi.png", Name = "G10", Category = category3, Company = company3, Price = 200, Quantity = 100, Type = "Female" };
-                //Product product4 = new Product { Image = $"{System.Environment.CurrentDirectory}" + @"\Images\Tufli.png", Name = "G10", Category = category4, Company = company4, Price = 550, Quantity = 10, Type = "Female" };
+                //Product product4 = new Product { Image = $"{System.Environment.CurrentDirectory}" + @"\Images\Tufli.png", Name = "LadyFirst", Category = category4, Company = company4, Price = 550, Quantity = 10, Type = "Female" };
                 //db.Products.Add(product1);
                 //db.Products.Add(product2);
                 //db.Products.Add(product3);

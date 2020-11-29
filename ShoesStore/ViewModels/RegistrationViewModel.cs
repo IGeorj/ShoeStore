@@ -82,6 +82,7 @@ namespace ShoesStore.ViewModels
                 db.Users.Add(new User { Login = Login, Name = Name, Password = Password, Proffesion = "Seller" });
                 db.SaveChanges();
                 RegisterAction();
+                MessageBox.Show("Registered successfully");
             }
         }
         public RegistrationViewModel()

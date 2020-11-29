@@ -1,13 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ShoesStore.Models;
-using System;
-using System.Collections.Generic;
+﻿using ShoesStore.Models;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace ShoesStore.ViewModels
 {
@@ -24,17 +16,15 @@ namespace ShoesStore.ViewModels
                 OnPropertyChanged();
             }
         }
+
         public OrdersViewModel()
         {
             LoadDataAsync();
         }
-        public async Task LoadDataAsync()
+
+        public async void LoadDataAsync()
         {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                var orders = await Task.Run(() => db.Orders.Include("User").ToListAsync());
-                Orders = new ObservableCollection<Order>(orders);
-            }
+            Orders = await DatabaseController.GetOrdersAsync();
         }
     }
 }

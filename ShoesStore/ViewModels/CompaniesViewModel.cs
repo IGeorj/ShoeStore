@@ -52,8 +52,8 @@ namespace ShoesStore.ViewModels
             {
                 db.Companies.Remove(SelectedCompany);
                 db.SaveChanges();
+                Companies.Remove(SelectedCompany);
             }
-            LoadDataAsync();
         }
 
         public CompaniesViewModel()
@@ -61,13 +61,9 @@ namespace ShoesStore.ViewModels
             LoadDataAsync();
         }
 
-        public async Task LoadDataAsync()
+        public async void LoadDataAsync()
         {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                var companies = await Task.Run(() => db.Companies.ToListAsync());
-                Companies = new ObservableCollection<Company>(companies);
-            }
+            Companies = await DatabaseController.GetCompaniesAsync();
         }
     }
 }

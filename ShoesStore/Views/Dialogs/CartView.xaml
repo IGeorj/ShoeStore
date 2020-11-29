@@ -73,7 +73,7 @@
         <Button IsCancel="True" x:Name="Close" VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="Gray" Background="{x:Null}" BorderBrush="{x:Null}">
             <materialDesign:PackIcon Kind="Close" />
         </Button>
-        <Button VerticalAlignment="Bottom" Margin="650 0 10 10" Name="btnAdd" Grid.Row="1" Background="#FF7A00C0" BorderBrush="#FF7A00C0">
+        <Button Command="{Binding AcceptCommand}" VerticalAlignment="Bottom" Margin="650 0 10 10" Name="btnAdd" Grid.Row="1" Background="#FF7A00C0" BorderBrush="#FF7A00C0">
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Check" VerticalAlignment="Center" />
                 <TextBlock Text="Accept" FontSize="13" Margin="5 0 0 0" VerticalAlignment="Center" />

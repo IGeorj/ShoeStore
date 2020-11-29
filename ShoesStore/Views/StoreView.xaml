@@ -10,7 +10,8 @@
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Horizontal">
             <Button Margin="0 0 0 0" Width="80" Content="Male" Background="#FF7A00C0" BorderBrush="#FF7A00C0" Command="{Binding DataContext.FilterCommand, RelativeSource={ RelativeSource AncestorType={x:Type Grid} } }" CommandParameter="Male"></Button>
-            <Button Margin="5 0 150 0" Width="80" Content="Female" Background="#FF7A00C0" BorderBrush="#FF7A00C0" Command="{Binding DataContext.FilterCommand, RelativeSource={ RelativeSource AncestorType={x:Type Grid} } }" CommandParameter="Female"></Button>
+            <Button Margin="5 0 30 0" Width="80" Content="Female" Background="#FF7A00C0" BorderBrush="#FF7A00C0" Command="{Binding DataContext.FilterCommand, RelativeSource={ RelativeSource AncestorType={x:Type Grid} } }" CommandParameter="Female"></Button>
+            <ComboBox ItemsSource="{Binding SortType}" Width="150" Margin="0 0 15 0" materialDesign:TextFieldAssist.HasClearButton="True" SelectedItem="{Binding SelectedSort}" materialDesign:HintAssist.Hint ="Select Sort Type"></ComboBox>
             <ComboBox ItemsSource="{Binding Categories}" Width="150" materialDesign:TextFieldAssist.HasClearButton="True" SelectedItem="{Binding SelectedCategory}" DisplayMemberPath="Name" materialDesign:HintAssist.Hint ="Select Category"></ComboBox>
             <TextBox x:Name="SearchBox" materialDesign:TextFieldAssist.HasClearButton="True" materialDesign:TextFieldAssist.UnderlineBrush="#FF22C68C" Text="{Binding SearchedText, UpdateSourceTrigger=PropertyChanged}" Padding="0" FontSize="15" Margin="5" Width="200" Height="28" CaretBrush="#FF22C68C"></TextBox>
             <Button x:Name='SearchButton' Width="30" Height="30" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Foreground="Gray">

@@ -15,7 +15,7 @@
             </Button>
         </StackPanel>
 
-        <DataGrid Margin="0 50 0 0" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedDetails}" Grid.Row="1" Grid.Column="1" SelectionMode="Single" Background="#FFFFFF" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False" x:Name="OrdersGrid">
+        <DataGrid Margin="0 50 0 0" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}" Grid.Row="1" Grid.Column="1" SelectionMode="Single" Background="#FFFFFF" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False" x:Name="OrdersGrid">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Email}" Header="Email" />
                 <DataGridTextColumn Binding="{Binding Login}" Header="Login" />

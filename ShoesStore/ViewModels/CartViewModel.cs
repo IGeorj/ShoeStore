@@ -1,11 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ShoesStore.Commands;
+﻿using ShoesStore.Commands;
 using ShoesStore.Models;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+using System.Windows;
 
 namespace ShoesStore.ViewModels
 {
@@ -14,9 +11,9 @@ namespace ShoesStore.ViewModels
         private int _orderTotalPrice;
 
         public int OrderTotalPrice
-        { 
+        {
             get => _orderTotalPrice;
-            set 
+            set
             {
                 _orderTotalPrice = value;
                 OnPropertyChanged();
@@ -47,8 +44,10 @@ namespace ShoesStore.ViewModels
             {
                 _cart = value;
                 OnPropertyChanged();
+                RefreshOrderPrice();
             }
         }
+
         private RelayCommand _removeProductCommand;
 
         public RelayCommand RemoveProductCommand
@@ -62,40 +61,59 @@ namespace ShoesStore.ViewModels
                   }));
             }
         }
+
+        private RelayCommand _acceptCommand;
+
+        public RelayCommand AcceptCommand
+        {
+            get
+            {
+                return _acceptCommand ??
+                  (_acceptCommand = new RelayCommand(obj =>
+                  {
+                      AcceptOrder();
+                  }));
+            }
+        }
+
+        public void AcceptOrder()
+        {
+            try
+            {
+                DatabaseController.ConfirmOrder(OrderTotalPrice);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+            LoadDataAsync();
+        }
+
         public void RemoveProduct()
         {
-            using(ApplicationContext db = new ApplicationContext())
+            DatabaseController.RemoveProductFromCart(SelectedDetails.Product.Id, SelectedDetails.Quantity);
+            Cart.Remove(SelectedDetails);
+            RefreshOrderPrice();
+        }
+
+        public void RefreshOrderPrice()
+        {
+            OrderTotalPrice = 0;
+            foreach (var item in Cart)
             {
-                Product product = db.Products.Find(SelectedDetails.Product.Id);
-                product.Quantity += SelectedDetails.Quantity;
-                db.SaveChanges();
-                db.OrderDetails.Remove(db.OrderDetails.Find(SelectedDetails.Id));
-                db.SaveChanges();
-                LoadData();
+                OrderTotalPrice += item.TotalPrice;
             }
         }
+
         public CartViewModel()
         {
-            LoadData();
+            LoadDataAsync();
         }
-        public void LoadData()
+
+        public async void LoadDataAsync()
         {
-            //TODO CurrentUser
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                OrderTotalPrice = 0;
-                var order = db.Orders.FirstOrDefault(x => x.Status == "Pending");
-                if (order is null)
-                {
-                    db.Orders.Add(new Order { Date = DateTime.Now.ToString(), Status = "Pending", TotalPrice = 0, User = db.Users.First() });
-                    db.SaveChanges();
-                }
-                Cart = new ObservableCollection<OrderDetail>(db.OrderDetails.Include("Product").Where(x => x.Order.Status == "Pending"));
-                foreach (var item in Cart)
-                {
-                    OrderTotalPrice += item.TotalPrice;
-                }
-            }
+            Cart = await DatabaseController.GetCartAsync();
         }
     }
 }

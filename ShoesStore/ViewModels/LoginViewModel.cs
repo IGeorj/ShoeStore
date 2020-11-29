@@ -1,5 +1,6 @@
 ﻿using ShoesStore.Commands;
 using ShoesStore.Models;
+using ShoesStore.Utils;
 using System;
 using System.Linq;
 using System.Windows;
@@ -57,6 +58,7 @@ namespace ShoesStore.ViewModels
                 {
                     if (user.Password == Password)
                     {
+                        GlobalInfo.CurrentUser = user;
                         LoginAction();
                     }
                     else
@@ -66,7 +68,7 @@ namespace ShoesStore.ViewModels
                 }
                 else
                 {
-                    MessageBox.Show("Wrong Email/Username");
+                    MessageBox.Show("Wrong Login/Username");
                 }
             }
         }

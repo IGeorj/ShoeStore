@@ -52,8 +52,8 @@ namespace ShoesStore.ViewModels
             {
                 db.Categories.Remove(SelectedCategory);
                 db.SaveChanges();
+                Categories.Remove(SelectedCategory);
             }
-            LoadDataAsync();
         }
 
         public CategoriesViewModel()
@@ -61,13 +61,9 @@ namespace ShoesStore.ViewModels
             LoadDataAsync();
         }
 
-        public async Task LoadDataAsync()
+        public async void LoadDataAsync()
         {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                var categories = await Task.Run(() => db.Categories.ToListAsync());
-                Categories = new ObservableCollection<Category>(categories);
-            }
+            Categories = await DatabaseController.GetCategoriesAsync();
         }
     }
 }

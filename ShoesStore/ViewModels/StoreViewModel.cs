@@ -1,9 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ShoesStore.Commands;
+﻿using ShoesStore.Commands;
 using ShoesStore.Models;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace ShoesStore.ViewModels
@@ -11,6 +10,31 @@ namespace ShoesStore.ViewModels
     public class StoreViewModel : BaseViewModel
     {
         private string ProductType { get; set; }
+        private ObservableCollection<string> _sortType;
+
+        public ObservableCollection<string> SortType
+        {
+            get => _sortType;
+            set
+            {
+                _sortType = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _searchedText;
+
+        public string SearchedText
+        {
+            get { return _searchedText; }
+            set
+            {
+                _searchedText = value;
+                OnPropertyChanged();
+                Filter();
+            }
+        }
+
         private ObservableCollection<Category> _categories;
 
         public ObservableCollection<Category> Categories
@@ -51,14 +75,30 @@ namespace ShoesStore.ViewModels
             }
         }
 
-        private ObservableCollection<Product> _originalProduct { get; set; }
+        private string _selectedSort;
 
-        public ObservableCollection<Product> OriginalProducts
+        public string SelectedSort
         {
-            get { return _originalProduct; }
+            get
+            {
+                return _selectedSort;
+            }
             set
             {
-                _originalProduct = value;
+                _selectedSort = value;
+                OnPropertyChanged();
+                Filter();
+            }
+        }
+
+        private ObservableCollection<Product> _unfilteredProduct { get; set; }
+
+        public ObservableCollection<Product> UnfilteredProducts
+        {
+            get { return _unfilteredProduct; }
+            set
+            {
+                _unfilteredProduct = value;
                 OnPropertyChanged();
             }
         }
@@ -88,6 +128,7 @@ namespace ShoesStore.ViewModels
                   }));
             }
         }
+
         private RelayCommand _buyProductCommand;
 
         public RelayCommand BuyProductCommand
@@ -101,6 +142,7 @@ namespace ShoesStore.ViewModels
                   }));
             }
         }
+
         private RelayCommand _filterCommand;
 
         public RelayCommand FilterCommand
@@ -120,100 +162,126 @@ namespace ShoesStore.ViewModels
         {
             using (ApplicationContext db = new ApplicationContext())
             {
+                //Remove from database
                 db.Products.Remove(SelectedProduct);
                 db.SaveChanges();
+                //Remove from UI
                 Products.Remove(SelectedProduct);
             }
         }
+
         public void BuyProduct()
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                Product product = db.Products.Find(SelectedProduct.Id);
-                if(product.Quantity == 0)
+                try
                 {
-                    MessageBox.Show("Out of stock");
-                    return;
+                    DatabaseController.AddProductToCart(SelectedProduct.Id);
                 }
-                else
+                catch (Exception ex)
                 {
-                    product.Quantity -= 1;
-                    OrderDetail details = db.OrderDetails.Where(x => x.Order.Status == "Pending").FirstOrDefault(x => x.Product.Id == product.Id);
-                    if (details == null)
-                    {
-                        db.OrderDetails.Add(new OrderDetail { Product = product, Order = db.Orders.FirstOrDefault(x => x.Status == "Pending"), Quantity = 1, TotalPrice = product.Price });
-                    }
-                    else
-                    {
-                        details.Quantity += 1;
-                        details.TotalPrice += product.Price;
-                    }
+                    MessageBox.Show(ex.Message);
                 }
-                db.SaveChanges();
                 Refresh();
             }
         }
+
         public void Filter()
         {
+            ObservableCollection<Product> temp = new ObservableCollection<Product>(UnfilteredProducts);
             //TODO
-            TypeFilter();
-            CategoryFilter();
-            //SearchFilter();
-            //SortFilter();
+            temp = TypeFilter(temp);
+            temp = CategoryFilter(temp);
+            temp = SearchFilter(temp);
+            temp = SortFilter(temp);
+            Products = temp;
         }
 
-        public void TypeFilter()
+        public ObservableCollection<Product> TypeFilter(ObservableCollection<Product> temp)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
                 if (string.IsNullOrEmpty(ProductType))
                 {
-                    Products = new ObservableCollection<Product>(_originalProduct);
+                    return temp;
                 }
-                if (ProductType == "Male")
+                else
                 {
-                    Products = new ObservableCollection<Product>(_originalProduct.Where(x => x.Type == "Male").ToList());
-                }
-                if (ProductType == "Female")
-                {
-                    Products = new ObservableCollection<Product>(_originalProduct.Where(x => x.Type == "Female").ToList());
+                    if (ProductType == "Male")
+                    {
+                        return new ObservableCollection<Product>(temp.Where(x => x.Type == "Male").ToList());
+                    }
+                    else
+                    {
+                        return new ObservableCollection<Product>(temp.Where(x => x.Type == "Female").ToList());
+                    }
                 }
             }
         }
 
-        public void CategoryFilter()
+        public ObservableCollection<Product> CategoryFilter(ObservableCollection<Product> temp)
         {
             if (SelectedCategory == null)
             {
-                return;
+                return temp;
             }
-            Products = new ObservableCollection<Product>(Products.Where(x => x.Category.Name == SelectedCategory.Name));
+            else
+            {
+                return new ObservableCollection<Product>(temp.Where(x => x.Category.Name == SelectedCategory.Name));
+            }
+        }
+
+        public ObservableCollection<Product> SearchFilter(ObservableCollection<Product> temp)
+        {
+            if (string.IsNullOrEmpty(SearchedText))
+            {
+                return temp;
+            }
+            else
+            {
+                var items = temp.Where(x => x.Name.StartsWith(SearchedText, StringComparison.OrdinalIgnoreCase) || x.Company.Name.StartsWith(SearchedText, StringComparison.OrdinalIgnoreCase));
+                return new ObservableCollection<Product>(items);
+            }
+        }
+
+        public ObservableCollection<Product> SortFilter(ObservableCollection<Product> temp)
+        {
+            if (string.IsNullOrEmpty(SelectedSort))
+            {
+                return temp;
+            }
+            else
+            {
+                if (SelectedSort == "Price↓")
+                {
+                    return new ObservableCollection<Product>(temp.OrderBy(x => x.Price));
+                }
+                else
+                {
+                    return new ObservableCollection<Product>(temp.OrderByDescending(x => x.Price));
+                }
+            }
         }
 
         public StoreViewModel()
         {
             LoadDataAsync();
+            SortType = new ObservableCollection<string>() { "Price↑", "Price↓" };
+            //With a underscore so as not to trigger Filter;
+            _searchedText = "";
         }
 
-        public async Task LoadDataAsync()
+        public async void LoadDataAsync()
         {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                var products = await Task.Run(() => db.Products.Include("Company").Include("Category").ToListAsync());
-                Products = new ObservableCollection<Product>(products);
-                _originalProduct = new ObservableCollection<Product>(Products);
-                var categories = await Task.Run(() => db.Categories.ToListAsync());
-                Categories = new ObservableCollection<Category>(categories);
-            }
+            Products = await DatabaseController.GetProductsAsync();
+            _unfilteredProduct = new ObservableCollection<Product>(Products);
+            Categories = await DatabaseController.GetCategoriesAsync();
         }
 
-        public void Refresh()
+        public async void Refresh()
         {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                Products = new ObservableCollection<Product>(db.Products.Include("Company").Include("Category").ToList());
-                _originalProduct = new ObservableCollection<Product>(Products);
-            }
+            Products = await DatabaseController.GetProductsAsync();
+            _unfilteredProduct = new ObservableCollection<Product>(Products);
             Filter();
         }
     }

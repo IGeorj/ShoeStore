@@ -1,5 +1,6 @@
 ﻿using ShoesStore.Commands;
 using ShoesStore.Models;
+using ShoesStore.Utils;
 using ShoesStore.ViewModels;
 using ShoesStore.Views;
 using ShoesStore.Views.Dialogs;
@@ -15,13 +16,19 @@ namespace ShoesStore
         public MainWindow()
         {
             InitializeComponent();
-
             DataContext = viemodel;
-            using (ApplicationContext db = new ApplicationContext())
+            if(GlobalInfo.CurrentUser.Proffesion == "Seller")
             {
+                SellerMode();
             }
         }
 
+        private void SellerMode()
+        {
+            CategoryMenu.Visibility = Visibility.Collapsed;
+            CompanyMenu.Visibility = Visibility.Collapsed;
+            UserMenu.Visibility = Visibility.Collapsed;
+        }
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.LeftButton == MouseButtonState.Pressed)
@@ -44,15 +51,15 @@ namespace ShoesStore
                     break;
 
                 case 2:
-                    cmd.Execute("Companies");
+                    cmd.Execute("Orders");
                     break;
 
                 case 3:
-                    cmd.Execute("Categories");
+                    cmd.Execute("Companies");
                     break;
 
                 case 4:
-                    cmd.Execute("Orders");
+                    cmd.Execute("Categories");
                     break;
 
                 case 5:

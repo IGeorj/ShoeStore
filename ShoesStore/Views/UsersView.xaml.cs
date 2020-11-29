@@ -20,7 +20,7 @@ namespace ShoesStore.Views
             editUser.DataContext = new EditUserViewModel(viewModel.SelectedUser.Id);
             if (editUser.ShowDialog() == true)
             {
-                viewModel.SearchUser();
+                viewModel.LoadDataAsync();
             }
         }
     }
