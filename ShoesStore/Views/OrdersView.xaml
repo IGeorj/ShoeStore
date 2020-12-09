@@ -19,7 +19,7 @@
             </Button>
         </StackPanel>
 
-        <DataGrid Margin="5 0 0 0" ItemsSource="{Binding Orders}" SelectedItem="{Binding SelectedUsers}" Grid.Row="1" Grid.Column="1" SelectionMode="Single" Background="#FFFFFF" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False" x:Name="OrdersGrid">
+        <DataGrid Margin="5 0 0 0" ItemsSource="{Binding Orders}" SelectedItem="{Binding SelectedOrder}" Grid.Row="1" Grid.Column="1" SelectionMode="Single" Background="#FFFFFF" IsReadOnly="True" IsSynchronizedWithCurrentItem="True" AutoGenerateColumns="False" x:Name="OrdersGrid">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding User.Name}" Header="User" />
                 <DataGridTextColumn Binding="{Binding Date}" Header="Date" />
@@ -28,7 +28,7 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Background="#FF22C68C" Foreground="White" x:Name="Accept" Height="25" Width="70" FontSize="10" Padding="0" BorderBrush="#FF1FCC88">Accept</Button>
+                            <Button Command="{Binding DataContext.CheckoutCommand, RelativeSource={ RelativeSource AncestorType={x:Type DataGrid} } }" Background="#FF22C68C" Foreground="White" x:Name="Checkout" Height="25" Width="70" FontSize="10" Padding="0" BorderBrush="#FF1FCC88">Checkout</Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

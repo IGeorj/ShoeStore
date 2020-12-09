@@ -62,7 +62,17 @@ namespace ShoesStore
         {
             using (ApplicationContext db = new ApplicationContext())
             {
-                var items = await Task.Run(() => db.Orders.Include("User").ToListAsync());
+                var items = await Task.Run(() => db.Orders.Include("User").Include(x => x.OrderDetails).ThenInclude(x => x.Product).ToListAsync());
+                return new ObservableCollection<Order>(items);
+            }
+        }
+        public async static Task<ObservableCollection<Order>> SearchOrdersAsync(string text)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                var items = await Task.Run(() =>
+                db.Orders.Include("User").Include(x => x.OrderDetails).ThenInclude(x => x.Product).Where(x => x.Date.Contains(text) || x.Status.StartsWith(text) || x.User.Name.StartsWith(text))
+                );
                 return new ObservableCollection<Order>(items);
             }
         }

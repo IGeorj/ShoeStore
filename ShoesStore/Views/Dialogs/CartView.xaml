@@ -67,8 +67,8 @@
             </DataGrid.CellStyle>
         </DataGrid>
         <StackPanel Margin="0 10 0 0" Orientation="Horizontal" Grid.Row="1" Background="GhostWhite">
-            <TextBlock x:Name="lblTotal" TextAlignment="Right" FontWeight="Bold"  Text="Total price:"></TextBlock>
-            <TextBlock x:Name="lblTotalSalesInvoiceAmount" Text="{Binding OrderTotalPrice, StringFormat={}{0:C}}" TextAlignment="Left" FontWeight="Bold" Padding="18 0 0 0"></TextBlock>
+            <TextBlock x:Name="lblTotal" TextAlignment="Right" FontWeight="DemiBold" Foreground="Gray"  Text="Total price:"></TextBlock>
+            <TextBlock x:Name="lblTotalSalesInvoiceAmount" Foreground="Gray" Text="{Binding OrderTotalPrice, StringFormat={}{0:C}}" TextAlignment="Left" FontWeight="Bold" Padding="18 0 0 0"></TextBlock>
         </StackPanel>
         <Button IsCancel="True" x:Name="Close" VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="Gray" Background="{x:Null}" BorderBrush="{x:Null}">
             <materialDesign:PackIcon Kind="Close" />
